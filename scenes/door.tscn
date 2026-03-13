@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dl3fxprpu0up7"]
+
+[ext_resource type="Script" uid="uid://xmyyiort152g" path="res://scripts/door.gd" id="1_83dcw"]
+[ext_resource type="Texture2D" uid="uid://d0bgn8xjxll43" path="res://assets/images/EoW_Locked_Door_Model.png" id="1_uvdjg"]
+[ext_resource type="Texture2D" uid="uid://c1qo12ui54rc2" path="res://assets/images/heart.png" id="2_83dcw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_la1wf"]
+size = Vector2(71, 58)
+
+[node name="Door" type="Area2D" groups=["door"]]
+position = Vector2(54, 55)
+script = ExtResource("1_83dcw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(25.5, 19)
+shape = SubResource("RectangleShape2D_la1wf")
+
+[node name="DoorSprite" type="Sprite2D" parent="."]
+position = Vector2(26, 21)
+scale = Vector2(0.5, 0.411)
+texture = ExtResource("1_uvdjg")
+
+[node name="LootIcon" type="Sprite2D" parent="."]
+position = Vector2(26.000004, 3.0000002)
+scale = Vector2(0.09, 0.09)
+texture = ExtResource("2_83dcw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

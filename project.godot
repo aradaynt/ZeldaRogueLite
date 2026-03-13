@@ -15,6 +15,10 @@ run/main_scene="uid://mctmevkq24s4"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://scripts/game_manager.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"
@@ -23,6 +27,7 @@ window/stretch/mode="canvas_items"
 
 player=""
 enemy=""
+door=""
 
 [input]
 

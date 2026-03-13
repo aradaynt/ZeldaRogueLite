@@ -7,7 +7,7 @@ var current_weapon = Weapon.NONE
 
 # --- COMBAT STATS ---
 var base_damage = 1.0
-var weapon_upgrades = 0
+var weapon_upgrades = GameManager.player_weapon_upgrades
 
 var max_ammo = 6
 var current_ammo = max_ammo
@@ -16,8 +16,8 @@ var is_attacking = false
 
 var facing_direction = Vector2.DOWN
 
-var max_hp = 3.0
-var current_hp = max_hp
+var max_hp = GameManager.player_max_hp
+var current_hp = GameManager.player_current_hp
 var is_invincible = false
 
 var knockback = Vector2.ZERO

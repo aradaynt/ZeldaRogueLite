@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cv3ap133sq1dq"]
+
+[ext_resource type="Script" uid="uid://cwp4aevm3fupt" path="res://scripts/main.gd" id="1_586c8"]
+[ext_resource type="PackedScene" uid="uid://dhrbo4gci2ne6" path="res://scenes/player.tscn" id="2_lsxps"]
+[ext_resource type="PackedScene" uid="uid://cn03hd448xs5d" path="res://scenes/enemy.tscn" id="3_63qte"]
+[ext_resource type="PackedScene" uid="uid://dl3fxprpu0up7" path="res://scenes/door.tscn" id="4_flmds"]
+
+[node name="Room2" type="Node2D"]
+script = ExtResource("1_586c8")
+room_name = "room_2"
+
+[node name="Root" parent="." instance=ExtResource("2_lsxps")]
+position = Vector2(215, -107)
+
+[node name="Enemy" parent="." instance=ExtResource("3_63qte")]
+position = Vector2(129, 517)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_63qte")]
+position = Vector2(1003, 517)
+
+[node name="Door" parent="." instance=ExtResource("4_flmds")]
+position = Vector2(639, 43)
+next_room_path = "uid://daf6jroep834m"
+is_back_door = true

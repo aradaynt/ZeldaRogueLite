@@ -30,6 +30,9 @@ func take_damage(amount, source_position):
 	is_stunned = true
 	if hp <= 0:
 		print("Enemy defeated!")
+		var main_room = get_tree().current_scene
+		if main_room.has_method("enemy_defeated"):
+			main_room.enemy_defeated()
 		queue_free()
 		return 
 	await get_tree().create_timer(0.3).timeout
