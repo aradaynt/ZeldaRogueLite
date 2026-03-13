@@ -1,0 +1,116 @@
+extends CharacterBody2D
+
+const SPEED = 300.0
+
+enum Weapon {NONE, SWORD, MACE, GUN}
+var current_weapon = Weapon.NONE
+
+# --- COMBAT STATS ---
+var base_damage = 1.0
+var weapon_upgrades = 0
+
+var max_ammo = 6
+var current_ammo = max_ammo
+var is_reloading = false
+var is_attacking = false 
+
+var facing_direction = Vector2.DOWN
+
+var tex_unarmed = preload("res://assets/images/Untitled.png")
+var tex_sword = preload("res://assets/images/sword/lonkSword.png")
+var tex_mace = preload("res://assets/images/mace/lonkMace.png")
+var tex_gun = preload("res://assets/images/gun/lonkGun.png")
+
+@onready var sprite = $PlayerSprite
+@onready var weapon_pivot = $WeaponPivot
+@onready var sword_collision = $WeaponPivot/SwordHitbox/CollisionShape2D
+@onready var mace_collision = $MaceHitbox/CollisionShape2D
+
+func _ready():
+	equip_weapon(Weapon.NONE)
+	sword_collision.disabled = true
+	mace_collision.disabled = true
+
+
+func _physics_process(_delta) -> void:
+	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	
+	if direction != Vector2.ZERO:
+		facing_direction = direction.normalized()
+		weapon_pivot.rotation = facing_direction.angle()
+
+	var current_speed = SPEED
+	if current_weapon == Weapon.MACE and is_attacking:
+		current_speed = SPEED * 0.2
+	
+	if direction:
+		velocity = direction * current_speed
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO,current_speed)
+		
+	move_and_slide()
+	
+	if Input.is_action_just_pressed("ui_accept"):
+		test_swap_weapon()
+		
+	if Input.is_action_just_pressed("attack") and not is_reloading and not is_attacking:
+		attack()
+
+	if Input.is_action_just_pressed("reload") and current_weapon == Weapon.GUN and not is_reloading:
+		reload()
+
+func equip_weapon(new_weapon):
+	current_weapon = new_weapon
+	
+	match current_weapon:
+		Weapon.NONE:
+			sprite.texture = tex_unarmed
+		Weapon.SWORD:
+			sprite.texture = tex_sword
+		Weapon.MACE:
+			sprite.texture = tex_mace
+		Weapon.GUN:
+			sprite.texture = tex_gun
+			
+func test_swap_weapon():
+	var next = (current_weapon + 1) % 4
+	equip_weapon(next)
+	
+func get_total_damage():
+	return base_damage + (weapon_upgrades * 0.5)
+	
+func attack():
+	if current_weapon == Weapon.NONE:
+		return
+	
+	is_attacking = true
+	
+	match current_weapon:
+		Weapon.SWORD:
+			print("Swung sword in direction ", facing_direction, " for ", get_total_damage(), " damage")
+			sword_collision.disabled = false
+			await get_tree().create_timer(0.2).timeout
+			sword_collision.disabled = true
+		Weapon.MACE:
+			print("Slammed mace around Lonk for ", get_total_damage(), " damage")
+			mace_collision.disabled = false
+			await get_tree().create_timer(0.5).timeout
+			mace_collision.disabled = true
+		Weapon.GUN:
+			if current_ammo > 0:
+				current_ammo -= 1
+				print("Shot bullet in direction ", facing_direction, "! Ammo left ", current_ammo)
+				#TODO Spawn bullet object
+			else:
+				print("Out of Ammo.")
+				
+	# await get_tree().create_timer(0.5).timeout
+	is_attacking = false
+	
+func reload():
+	is_reloading = true
+	print("Reloading...")
+	await get_tree().create_timer(1).timeout
+	current_ammo = max_ammo
+	print("Reloaded! Ammo: ", current_ammo)
+	is_reloading = false
