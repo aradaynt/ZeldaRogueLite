@@ -8,12 +8,12 @@ radius = 28.0
 height = 140.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
-size = Vector2(38.5, 153.5)
+size = Vector2(45.25, 265)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
-radius = 103.00485
+radius = 130.0
 
-[node name="Node2D" type="Node2D"]
+[node name="Root" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(326, 260)
@@ -32,7 +32,7 @@ shape = SubResource("CapsuleShape2D_v6fml")
 [node name="SwordHitbox" type="Area2D" parent="Player/WeaponPivot"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/WeaponPivot/SwordHitbox"]
-position = Vector2(93, 7)
+position = Vector2(99, 7)
 shape = SubResource("RectangleShape2D_g2els")
 disabled = true
 
@@ -42,3 +42,6 @@ disabled = true
 position = Vector2(-3, 8)
 shape = SubResource("CircleShape2D_qhqgy")
 disabled = true
+
+[connection signal="body_entered" from="Player/WeaponPivot/SwordHitbox" to="Player" method="_on_sword_hitbox_body_entered"]
+[connection signal="body_entered" from="Player/MaceHitbox" to="Player" method="_on_mace_hitbox_body_entered"]

@@ -20,6 +20,7 @@ var tex_unarmed = preload("res://assets/images/Untitled.png")
 var tex_sword = preload("res://assets/images/sword/lonkSword.png")
 var tex_mace = preload("res://assets/images/mace/lonkMace.png")
 var tex_gun = preload("res://assets/images/gun/lonkGun.png")
+var bullet_scene = preload("res://scenes/bullet.tscn")
 
 @onready var sprite = $PlayerSprite
 @onready var weapon_pivot = $WeaponPivot
@@ -100,9 +101,17 @@ func attack():
 			if current_ammo > 0:
 				current_ammo -= 1
 				print("Shot bullet in direction ", facing_direction, "! Ammo left ", current_ammo)
-				#TODO Spawn bullet object
+				var new_bullet = bullet_scene.instantiate()
+				
+				new_bullet.global_position = global_position
+				
+				new_bullet.direction = facing_direction
+				new_bullet.damage = get_total_damage()
+				get_tree().root.add_child(new_bullet)
+				await get_tree().create_timer(0.2).timeout
 			else:
 				print("Out of Ammo.")
+				await get_tree().create_timer(0.1).timeout
 				
 	# await get_tree().create_timer(0.5).timeout
 	is_attacking = false
@@ -114,3 +123,13 @@ func reload():
 	current_ammo = max_ammo
 	print("Reloaded! Ammo: ", current_ammo)
 	is_reloading = false
+
+
+func _on_sword_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		body.take_damage(get_total_damage())
+
+
+func _on_mace_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		body.take_damage(get_total_damage())
