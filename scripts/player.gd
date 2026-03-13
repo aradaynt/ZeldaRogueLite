@@ -16,6 +16,12 @@ var is_attacking = false
 
 var facing_direction = Vector2.DOWN
 
+var max_hp = 3.0
+var current_hp = max_hp
+var is_invincible = false
+
+var knockback = Vector2.ZERO
+
 var tex_unarmed = preload("res://assets/images/Untitled.png")
 var tex_sword = preload("res://assets/images/sword/lonkSword.png")
 var tex_mace = preload("res://assets/images/mace/lonkMace.png")
@@ -33,7 +39,7 @@ func _ready():
 	mace_collision.disabled = true
 
 
-func _physics_process(_delta) -> void:
+func _physics_process(delta) -> void:
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
 	if direction != Vector2.ZERO:
@@ -48,6 +54,9 @@ func _physics_process(_delta) -> void:
 		velocity = direction * current_speed
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO,current_speed)
+	
+	velocity += knockback
+	knockback = knockback.move_toward(Vector2.ZERO, 2000 * delta)
 		
 	move_and_slide()
 	
@@ -127,9 +136,28 @@ func reload():
 
 func _on_sword_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
-		body.take_damage(get_total_damage())
+		body.take_damage(get_total_damage(), global_position)
 
 
 func _on_mace_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
-		body.take_damage(get_total_damage())
+		body.take_damage(get_total_damage(), global_position)
+
+func take_damage(amount, source_position):
+	if is_invincible:
+		return
+	
+	current_hp -= amount
+	print("Lonk took Damage! HP left: ", current_hp)
+	
+	var knockback_direction = (global_position - source_position).normalized()
+	knockback = knockback_direction * 800
+	
+	if current_hp<= 0:
+		print("Game Over! Lonk Died.")
+	
+	is_invincible = true
+	sprite.modulate = Color(1,0,0,0.5)
+	await get_tree().create_timer(1.0).timeout
+	sprite.modulate = Color(1,1,1,1)
+	is_invincible = false

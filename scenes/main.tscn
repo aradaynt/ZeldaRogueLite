@@ -5,7 +5,7 @@
 
 [node name="Main" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_o5qli")]
+[node name="Player" parent="." groups=["enemy", "player"] instance=ExtResource("1_o5qli")]
 
 [node name="Enemy" parent="." groups=["enemy"] instance=ExtResource("2_0wfyh")]
 position = Vector2(885, 301)

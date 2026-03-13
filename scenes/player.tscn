@@ -15,7 +15,7 @@ radius = 130.0
 
 [node name="Root" type="Node2D"]
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(326, 260)
 script = ExtResource("1_g2els")
 

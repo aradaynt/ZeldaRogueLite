@@ -11,5 +11,5 @@ func _physics_process(delta):
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
-		body.take_damage(damage)
+		body.take_damage(damage, global_position)
 		queue_free()
