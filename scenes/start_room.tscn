@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1merdjg5wuem"]
+
+[ext_resource type="PackedScene" uid="uid://bdsqhf5yaphqs" path="res://scenes/base_room.tscn" id="1_7xb2g"]
+[ext_resource type="PackedScene" uid="uid://bvx3h2gg83255" path="res://scenes/weapon_pickup.tscn" id="2_2c2u3"]
+
+[node name="StartRoom" instance=ExtResource("1_7xb2g")]
+
+[node name="DoorTop" parent="." index="1"]
+next_room_path = "uid://dh8tp2bhawofr"
+
+[node name="DoorBottom" parent="." index="4"]
+is_active = false
+
+[node name="WeaponPickup" parent="." index="5" instance=ExtResource("2_2c2u3")]
+position = Vector2(543, 290)
+scale = Vector2(0.5, 0.5)
+
+[node name="WeaponPickup2" parent="." index="6" instance=ExtResource("2_2c2u3")]
+position = Vector2(326, 290)
+scale = Vector2(0.5, 0.5)
+weapon_name = "mace"
+
+[node name="WeaponPickup3" parent="." index="7" instance=ExtResource("2_2c2u3")]
+position = Vector2(782, 310)
+scale = Vector2(0.5, 0.5)
+weapon_name = "gun"

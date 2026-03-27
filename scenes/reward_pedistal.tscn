@@ -1,19 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dq2dh3626tf7a"]
+[gd_scene load_steps=3 format=3 uid="uid://dq2dh3626tf7a"]
 
-[ext_resource type="Texture2D" uid="uid://bg1hexqm1fj4c" path="res://assets/images/Untitled.png" id="1_aivc8"]
 [ext_resource type="Script" uid="uid://bpe32ebtkpjhs" path="res://scripts/reward_pedistal.gd" id="1_rymfk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rymfk"]
-size = Vector2(49, 143)
+size = Vector2(45, 42)
 
 [node name="RewardPedistal" type="Area2D"]
 script = ExtResource("1_rymfk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-4, -32)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("1_aivc8")
+position = Vector2(0.20000076, -9.800003)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4, -32)
+position = Vector2(0.50000095, 0)
 shape = SubResource("RectangleShape2D_rymfk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

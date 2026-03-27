@@ -1,40 +1,272 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhrbo4gci2ne6"]
+[gd_scene load_steps=42 format=3 uid="uid://dhrbo4gci2ne6"]
 
 [ext_resource type="Script" uid="uid://bx1r4ljqmmxw1" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://bg1hexqm1fj4c" path="res://assets/images/Untitled.png" id="1_p0vlq"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v6fml"]
-radius = 28.0
-height = 140.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
-size = Vector2(45.25, 265)
+[ext_resource type="Texture2D" uid="uid://bg1hexqm1fj4c" path="res://assets/images/lonkBase0.png" id="2_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://c773i8tnltrps" path="res://assets/images/lonkBase1.png" id="3_fjrip"]
+[ext_resource type="Texture2D" uid="uid://b1mn0t84755oi" path="res://assets/images/lonkBase2.png" id="4_smehm"]
+[ext_resource type="Texture2D" uid="uid://dfmg2t22wsdwe" path="res://assets/images/lonkBase3.png" id="5_ur7pv"]
+[ext_resource type="Texture2D" uid="uid://dhl37jhy2wfmd" path="res://assets/images/lonkBase4.png" id="6_y4r1p"]
+[ext_resource type="Texture2D" uid="uid://c5ckpncdkdayd" path="res://assets/images/mace/lonkMace.png" id="7_a8ls1"]
+[ext_resource type="Texture2D" uid="uid://6mjolny5hxdt" path="res://assets/images/gun/lonkGun.png" id="7_i4ail"]
+[ext_resource type="Texture2D" uid="uid://vwfbsgag2vh3" path="res://assets/images/gun/lonkGun1.png" id="8_a38lo"]
+[ext_resource type="Texture2D" uid="uid://daf75s5sdvlpe" path="res://assets/images/mace/lonkMace1.png" id="8_qfm1y"]
+[ext_resource type="Texture2D" uid="uid://bxyxq5alsdsgv" path="res://assets/images/gun/lonkGun2.png" id="9_4ni07"]
+[ext_resource type="Texture2D" uid="uid://upspblxnsnfs" path="res://assets/images/mace/lonkMace2.png" id="9_fulsm"]
+[ext_resource type="Texture2D" uid="uid://cmvwpfrsaox3x" path="res://assets/images/mace/lonkMace3.png" id="10_4r5pv"]
+[ext_resource type="Texture2D" uid="uid://7xmwuxjpqq7w" path="res://assets/images/gun/lonkGun3.png" id="10_l71n6"]
+[ext_resource type="Texture2D" uid="uid://dc4asw6e415rq" path="res://assets/images/mace/lonkMace4.png" id="11_60mlk"]
+[ext_resource type="Texture2D" uid="uid://bgwhojplmj3wk" path="res://assets/images/gun/lonkGun4.png" id="11_ke2ow"]
+[ext_resource type="Texture2D" uid="uid://c83e46m0qq1dw" path="res://assets/images/sword/lonkSword.png" id="12_i4ail"]
+[ext_resource type="Texture2D" uid="uid://ccmnbydul6tw" path="res://assets/images/sword/lonkSword1.png" id="13_a38lo"]
+[ext_resource type="Texture2D" uid="uid://bhjhq3ou5qhyx" path="res://assets/images/sword/lonkSword2.png" id="14_4ni07"]
+[ext_resource type="Texture2D" uid="uid://b1hj71xba72r7" path="res://assets/images/sword/lonkSword3.png" id="15_l71n6"]
+[ext_resource type="Texture2D" uid="uid://bokoaemcisvc7" path="res://assets/images/sword/lonkSword4.png" id="16_ke2ow"]
+[ext_resource type="Texture2D" uid="uid://b06531n6ls58r" path="res://assets/images/mace/slam0.png" id="22_bj30b"]
+[ext_resource type="Texture2D" uid="uid://emkjyqedxs0j" path="res://assets/images/sword/swing0.png" id="22_pf23h"]
+[ext_resource type="Texture2D" uid="uid://ce5algdp0maq" path="res://assets/images/sword/swing1.png" id="23_dt7fs"]
+[ext_resource type="Texture2D" uid="uid://fkkjfbh62vvv" path="res://assets/images/mace/slam1.png" id="23_jc3p3"]
+[ext_resource type="Texture2D" uid="uid://dcsdnqjnynai8" path="res://assets/images/mace/slam2.png" id="24_hax0n"]
+[ext_resource type="Texture2D" uid="uid://ck8bbcgxyj2k4" path="res://assets/images/sword/swing2.png" id="24_wqfne"]
+[ext_resource type="Texture2D" uid="uid://udypm0agogfx" path="res://assets/images/mace/slam3.png" id="25_t4otl"]
+[ext_resource type="Texture2D" uid="uid://b0x66gl0eybvx" path="res://assets/images/sword/swing3.png" id="25_wnwbv"]
+[ext_resource type="Texture2D" uid="uid://dxutk13yyliq7" path="res://assets/images/sword/swing4.png" id="26_gl8cc"]
+[ext_resource type="Texture2D" uid="uid://cf1xqmuyb4rnx" path="res://assets/images/mace/slam4.png" id="26_j2b1d"]
+[ext_resource type="Texture2D" uid="uid://bis85lkqcwxer" path="res://assets/images/sword/swing5.png" id="27_487ah"]
+[ext_resource type="Texture2D" uid="uid://cjms7irammg1y" path="res://assets/images/mace/slam5.png" id="27_cs1tg"]
+[ext_resource type="Texture2D" uid="uid://xs6d3tadwy0e" path="res://assets/images/mace/slam6.png" id="28_2dvfe"]
+[ext_resource type="Texture2D" uid="uid://byiwkgf4wyspu" path="res://assets/images/sword/swing6.png" id="28_md1ol"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
-radius = 130.0
+radius = 97.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bj30b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_bj30b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_jc3p3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_hax0n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_t4otl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_j2b1d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_cs1tg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_cs1tg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_2dvfe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_2dvfe")
+}],
+"loop": false,
+"name": &"mace",
+"speed": 32.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3vyb7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tuyoq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_i4ail")
+}],
+"loop": true,
+"name": &"still_gun",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_a8ls1")
+}],
+"loop": true,
+"name": &"still_mace",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_i4ail")
+}],
+"loop": true,
+"name": &"still_sword",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tuyoq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fjrip")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_smehm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fjrip")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_tuyoq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ur7pv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_y4r1p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ur7pv")
+}],
+"loop": true,
+"name": &"walking_base",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_i4ail")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_a38lo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_4ni07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_a38lo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_i4ail")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_l71n6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ke2ow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_l71n6")
+}],
+"loop": true,
+"name": &"walking_gun",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_a8ls1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qfm1y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_fulsm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qfm1y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_a8ls1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_4r5pv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_60mlk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_4r5pv")
+}],
+"loop": true,
+"name": &"walking_mace",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_i4ail")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_a38lo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_4ni07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_a38lo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_i4ail")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_l71n6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ke2ow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_l71n6")
+}],
+"loop": true,
+"name": &"walking_sword",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v6fml"]
+radius = 13.0
+height = 62.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+size = Vector2(33.125, 148)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i4ail"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_pf23h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_dt7fs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_wqfne")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_wnwbv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_gl8cc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_487ah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_md1ol")
+}],
+"loop": false,
+"name": &"sword",
+"speed": 30.0
+}]
 
 [node name="Root" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
-position = Vector2(326, 260)
+z_index = 10
+position = Vector2(1, -4)
 script = ExtResource("1_g2els")
-
-[node name="PlayerSprite" type="Sprite2D" parent="Player"]
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("1_p0vlq")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-1, 12)
-shape = SubResource("CapsuleShape2D_v6fml")
-
-[node name="WeaponPivot" type="Node2D" parent="Player"]
-
-[node name="SwordHitbox" type="Area2D" parent="Player/WeaponPivot"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/WeaponPivot/SwordHitbox"]
-position = Vector2(99, 7)
-shape = SubResource("RectangleShape2D_g2els")
-disabled = true
 
 [node name="MaceHitbox" type="Area2D" parent="Player"]
 
@@ -43,5 +275,37 @@ position = Vector2(-3, 8)
 shape = SubResource("CircleShape2D_qhqgy")
 disabled = true
 
-[connection signal="body_entered" from="Player/WeaponPivot/SwordHitbox" to="Player" method="_on_sword_hitbox_body_entered"]
+[node name="MaceAnim" type="AnimatedSprite2D" parent="Player/MaceHitbox"]
+visible = false
+position = Vector2(-3.5000033, 7.499995)
+scale = Vector2(0.6499999, 0.65)
+sprite_frames = SubResource("SpriteFrames_bj30b")
+animation = &"mace"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+scale = Vector2(0.13, 0.13)
+sprite_frames = SubResource("SpriteFrames_3vyb7")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-1, 7)
+shape = SubResource("CapsuleShape2D_v6fml")
+
+[node name="WeaponPivot" type="Node2D" parent="Player"]
+
+[node name="SwordHitbox" type="Area2D" parent="Player/WeaponPivot"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/WeaponPivot/SwordHitbox"]
+position = Vector2(70, 5)
+shape = SubResource("RectangleShape2D_g2els")
+disabled = true
+
+[node name="WeaponAnim" type="AnimatedSprite2D" parent="Player/WeaponPivot/SwordHitbox"]
+visible = false
+position = Vector2(69.49999, 4.9999905)
+scale = Vector2(0.6599998, 0.4933333)
+sprite_frames = SubResource("SpriteFrames_i4ail")
+animation = &"sword"
+
 [connection signal="body_entered" from="Player/MaceHitbox" to="Player" method="_on_mace_hitbox_body_entered"]
+[connection signal="body_entered" from="Player/WeaponPivot/SwordHitbox" to="Player" method="_on_sword_hitbox_body_entered"]

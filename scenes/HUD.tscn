@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0ou0e6wfjapq"]
+
+[ext_resource type="Script" uid="uid://bl30qqycwuoq7" path="res://scripts/hud.gd" id="1_fls4u"]
+[ext_resource type="Texture2D" uid="uid://c1qo12ui54rc2" path="res://assets/images/heart.png" id="2_1etfg"]
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fls4u")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 0.035
+anchor_bottom = 0.062000003
+offset_left = 8.0
+offset_top = 571.0
+offset_right = 111.68
+offset_bottom = 595.824
+
+[node name="HPLabel" type="Label" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_1etfg")
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+
+[node name="StatLabel" type="Label" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+
+[node name="AmmoLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_top = -33.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0

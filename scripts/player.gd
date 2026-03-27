@@ -1,11 +1,10 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
+const SPEED = 200.0
 
 enum Weapon {NONE, SWORD, MACE, GUN}
 var current_weapon = Weapon.NONE
 
-# --- COMBAT STATS ---
 var base_damage = 1.0
 var weapon_upgrades = GameManager.player_weapon_upgrades
 
@@ -22,19 +21,16 @@ var is_invincible = false
 
 var knockback = Vector2.ZERO
 
-var tex_unarmed = preload("res://assets/images/Untitled.png")
-var tex_sword = preload("res://assets/images/sword/lonkSword.png")
-var tex_mace = preload("res://assets/images/mace/lonkMace.png")
-var tex_gun = preload("res://assets/images/gun/lonkGun.png")
+
 var bullet_scene = preload("res://scenes/bullet.tscn")
 
-@onready var sprite = $PlayerSprite
 @onready var weapon_pivot = $WeaponPivot
 @onready var sword_collision = $WeaponPivot/SwordHitbox/CollisionShape2D
 @onready var mace_collision = $MaceHitbox/CollisionShape2D
 
 func _ready():
-	equip_weapon(Weapon.NONE)
+	if GameManager.equipped_weapon != "":
+		equip_weapon(GameManager.equipped_weapon)
 	sword_collision.disabled = true
 	mace_collision.disabled = true
 
@@ -51,17 +47,32 @@ func _physics_process(delta) -> void:
 		current_speed = SPEED * 0.2
 	
 	if direction:
+		match current_weapon:
+			Weapon.NONE:
+				$AnimatedSprite2D.play("walking_base")
+			Weapon.SWORD:
+				$AnimatedSprite2D.play("walking_sword")
+			Weapon.MACE:
+				$AnimatedSprite2D.play("walking_mace")
+			Weapon.GUN:
+				$AnimatedSprite2D.play("walking_gun")
 		velocity = direction * current_speed
 	else:
+		match current_weapon:
+			Weapon.NONE:
+				$AnimatedSprite2D.play("default")
+			Weapon.SWORD:
+				$AnimatedSprite2D.play("still_sword")
+			Weapon.MACE:
+				$AnimatedSprite2D.play("still_mace")
+			Weapon.GUN:
+				$AnimatedSprite2D.play("still_gun")
 		velocity = velocity.move_toward(Vector2.ZERO,current_speed)
 	
 	velocity += knockback
 	knockback = knockback.move_toward(Vector2.ZERO, 2000 * delta)
 		
 	move_and_slide()
-	
-	if Input.is_action_just_pressed("ui_accept"):
-		test_swap_weapon()
 		
 	if Input.is_action_just_pressed("attack") and not is_reloading and not is_attacking:
 		attack()
@@ -70,21 +81,26 @@ func _physics_process(delta) -> void:
 		reload()
 
 func equip_weapon(new_weapon):
-	current_weapon = new_weapon
+	match new_weapon.to_lower():
+		"sword":
+			current_weapon = Weapon.SWORD
+		"mace":
+			current_weapon = Weapon.MACE
+		"gun":
+			current_weapon = Weapon.GUN
+		_:
+			current_weapon = Weapon.NONE
 	
 	match current_weapon:
 		Weapon.NONE:
-			sprite.texture = tex_unarmed
+			$AnimatedSprite2D.play("walking_base")
 		Weapon.SWORD:
-			sprite.texture = tex_sword
+			$AnimatedSprite2D.play("walking_sword")
 		Weapon.MACE:
-			sprite.texture = tex_mace
+			$AnimatedSprite2D.play("walking_mace")
 		Weapon.GUN:
-			sprite.texture = tex_gun
+			$AnimatedSprite2D.play("walking_gun")
 			
-func test_swap_weapon():
-	var next = (current_weapon + 1) % 4
-	equip_weapon(next)
 	
 func get_total_damage():
 	return base_damage + (weapon_upgrades * 0.5)
@@ -99,12 +115,18 @@ func attack():
 		Weapon.SWORD:
 			print("Swung sword in direction ", facing_direction, " for ", get_total_damage(), " damage")
 			sword_collision.disabled = false
+			$WeaponPivot/SwordHitbox/WeaponAnim.visible = true
+			$WeaponPivot/SwordHitbox/WeaponAnim.play("sword")
 			await get_tree().create_timer(0.2).timeout
+			$WeaponPivot/SwordHitbox/WeaponAnim.visible = false
 			sword_collision.disabled = true
 		Weapon.MACE:
 			print("Slammed mace around Lonk for ", get_total_damage(), " damage")
 			mace_collision.disabled = false
+			$MaceHitbox/MaceAnim.visible = true
+			$MaceHitbox/MaceAnim.play("mace")
 			await get_tree().create_timer(0.5).timeout
+			$MaceHitbox/MaceAnim.visible = false
 			mace_collision.disabled = true
 		Weapon.GUN:
 			if current_ammo > 0:
@@ -157,7 +179,15 @@ func take_damage(amount, source_position):
 		print("Game Over! Lonk Died.")
 	
 	is_invincible = true
-	sprite.modulate = Color(1,0,0,0.5)
-	await get_tree().create_timer(1.0).timeout
-	sprite.modulate = Color(1,1,1,1)
+	$AnimatedSprite2D.modulate = Color(1,0,0,0.5)
+	await get_tree().create_timer(0.1).timeout
+	$AnimatedSprite2D.modulate = Color(1,1,1,1)
+	await get_tree().create_timer(0.1).timeout
+	$AnimatedSprite2D.modulate = Color(1,0,0,0.5)
+	await get_tree().create_timer(0.1).timeout
+	$AnimatedSprite2D.modulate = Color(1,1,1,1)
+	await get_tree().create_timer(0.1).timeout
+	$AnimatedSprite2D.modulate = Color(1,0,0,0.5)
+	await get_tree().create_timer(0.2).timeout
+	$AnimatedSprite2D.modulate = Color(1,1,1,1)
 	is_invincible = false

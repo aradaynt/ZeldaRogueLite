@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvx3h2gg83255"]
+
+[ext_resource type="Script" uid="uid://b3uudb4bgkiri" path="res://scripts/weapon_pickup.gd" id="1_8i8db"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aoepw"]
+radius = 85.28775
+
+[node name="WeaponPickup" type="Node2D" groups=["weapon_pickup"]]
+script = ExtResource("1_8i8db")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D" groups=["weapon_pickup"]]
+position = Vector2(-17.000011, 10.499992)
+scale = Vector2(0.71000004, 0.73375)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(29, 26)
+shape = SubResource("CircleShape2D_aoepw")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

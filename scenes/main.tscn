@@ -15,6 +15,7 @@ script = ExtResource("1_sugp2")
 position = Vector2(885, 301)
 
 [node name="Door" parent="." instance=ExtResource("4_jyhfs")]
+position = Vector2(62, 42)
 next_room_path = "uid://daf6jroep834m"
 
 [node name="RewardPedistal" parent="." instance=ExtResource("5_tbgi4")]
