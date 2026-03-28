@@ -41,7 +41,7 @@
 [ext_resource type="AudioStream" uid="uid://by4fo7q5e31nj" path="res://assets/sounds/hurt.mp3" id="39_giy8y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
-radius = 97.0
+radius = 117.00427
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bj30b"]
 animations = [{
@@ -283,8 +283,8 @@ disabled = true
 
 [node name="MaceAnim" type="AnimatedSprite2D" parent="Player/MaceHitbox"]
 visible = false
-position = Vector2(-3.5000033, 7.499995)
-scale = Vector2(0.6499999, 0.65)
+position = Vector2(-3.0000205, 7.9999995)
+scale = Vector2(0.7799999, 0.78000003)
 sprite_frames = SubResource("SpriteFrames_bj30b")
 animation = &"mace"
 

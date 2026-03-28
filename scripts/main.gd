@@ -60,6 +60,8 @@ func _ready():
 					player.global_position.x -= 90
 
 func check_room_cleared():
+	if not is_inside_tree():
+		return
 	await get_tree().process_frame
 	var enemies = get_tree().get_nodes_in_group("enemy")
 	print("Enemies left: ", enemies.size())

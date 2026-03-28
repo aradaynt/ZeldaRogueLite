@@ -10,6 +10,8 @@ enum State {CHASE, TELEGRAPH, ATTACK, SUMMON}
 var current_state = State.CHASE
 var attack_range = 60.0 
 
+var knockback = Vector2.ZERO
+var is_stunned = false
 var summon_cooldown_time = 8.0
 var summon_timer = 0.0
 var spirit_scene = preload("res://scenes/spirit.tscn") 
@@ -41,16 +43,20 @@ func _physics_process(delta):
 	match current_state:
 		State.CHASE:
 			anim.play("idle") 
-			var direction = (player.global_position - global_position).normalized()
-			velocity = direction * SPEED
-			anim.flip_h = direction.x < 0
-			if anim.flip_h:
-				$ScytheHitbox.position.x = -abs($ScytheHitbox.position.x)
+			if is_stunned:
+				velocity = knockback
+				knockback = knockback.move_toward(Vector2.ZERO, 2000 * delta)
 			else:
-				$ScytheHitbox.position.x = abs($ScytheHitbox.position.x)
-			
-			if global_position.distance_to(player.global_position) < attack_range:
-				start_attack()
+				var direction = (player.global_position - global_position).normalized()
+				velocity = direction * SPEED
+				anim.flip_h = direction.x < 0
+				if anim.flip_h:
+					$ScytheHitbox.position.x = -abs($ScytheHitbox.position.x)
+				else:
+					$ScytheHitbox.position.x = abs($ScytheHitbox.position.x)
+				
+				if global_position.distance_to(player.global_position) < attack_range:
+					start_attack()
 				
 		State.TELEGRAPH:
 			velocity = Vector2.ZERO
@@ -111,12 +117,18 @@ func take_damage(amount, _source_position):
 	health_bar.value = current_hp
 	print("Boss took damage! HP: ", current_hp)
 	
+	if GameManager.equipped_weapon == "mace":
+		var knockback_direction = (global_position - _source_position).normalized()
+		knockback = knockback_direction * 600
+		is_stunned = true
+	
 	anim.modulate = Color(1, 0, 0)
 	await get_tree().create_timer(0.1).timeout
 	anim.modulate = Color(1, 1, 1)
 	
 	if current_hp <= 0:
 		die()
+	is_stunned = false
 
 func die():
 	scythe_collision.set_deferred("disabled", true)
