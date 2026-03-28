@@ -1,0 +1,4 @@
+#!/bin/sh
+printf '\033c\033]0;%s\a' Zelda Roguelite
+base_path="$(dirname "$(realpath "$0")")"
+"$base_path/Zelda Roguelite.x86_64" "$@"

@@ -10,6 +10,7 @@ const COLOR_SELECTED = Color(1, 1, 1)
 const COLOR_NORMAL = Color(0,0, 0) 
 
 func _ready():
+	AudioManager.play_menu_music()
 	GameManager.reset_run()
 	update_selection_visuals()
 	Hud.get_node("CanvasLayer").visible = false
@@ -24,6 +25,7 @@ func _input(event):
 		update_selection_visuals()
 		
 	if event.is_action_pressed("ui_accept"):
+		AudioManager.play_select()
 		start_selected_game()
 
 func update_selection_visuals():

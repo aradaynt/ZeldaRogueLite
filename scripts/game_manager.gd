@@ -29,7 +29,7 @@ var treasure_room = "res://scenes/treasure_room_1.tscn"
 func _ready():
 	generate_dungeon(10) 
 
-func generate_dungeon(target_rooms: int = 10):
+func generate_dungeon(target_rooms):
 	map_grid.clear()
 	cleared_rooms.clear()
 	current_room_coords = Vector2.ZERO 

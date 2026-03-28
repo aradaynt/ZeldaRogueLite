@@ -6,6 +6,10 @@ extends Node2D
 var reward_scene = preload("res://scenes/reward_pedistal.tscn")
 
 func _ready():
+	if is_boss_room:
+		AudioManager.play_boss_music()
+	else:
+		AudioManager.play_bg_music()
 	if not GameManager.visited_rooms.has(GameManager.current_room_coords):
 		GameManager.visited_rooms.append(GameManager.current_room_coords)
 	
@@ -26,9 +30,18 @@ func _ready():
 		if enemies.size() > 0:
 			lock_all_doors()
 		else:
-			if not GameManager.cleared_rooms.has(room_name):
-				GameManager.cleared_rooms.append(room_name)
-			unlock_all_doors()
+			if GameManager.current_room_coords == Vector2.ZERO and GameManager.equipped_weapon == "":
+				print("DEBUG: Start room. Lonk is unarmed. LOCKING DOORS.")
+				lock_all_doors()
+				
+				for child in get_children():
+					if "WeaponPickup" in child.name:
+						if child.has_signal("picked_up") and not child.picked_up.is_connected(_on_reward_picked_up):
+							child.picked_up.connect(_on_reward_picked_up)
+			else:
+				if not GameManager.cleared_rooms.has(room_name):
+					GameManager.cleared_rooms.append(room_name)
+				unlock_all_doors()
 			
 	var player = $Player 
 	

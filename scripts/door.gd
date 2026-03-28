@@ -89,7 +89,6 @@ func configure_door(make_active: bool, path: String, back_door: bool):
 		else:
 			solid_blocker.set_deferred("disabled", true)
 			
-		# Look ahead at the coordinate this door leads to
 		var target_coords = GameManager.current_room_coords + get_direction_vector()
 		var target_room_name = "room_" + str(target_coords.x) + "_" + str(target_coords.y)
 		

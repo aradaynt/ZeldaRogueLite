@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dhrbo4gci2ne6"]
+[gd_scene load_steps=46 format=3 uid="uid://dhrbo4gci2ne6"]
 
 [ext_resource type="Script" uid="uid://bx1r4ljqmmxw1" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bg1hexqm1fj4c" path="res://assets/images/lonkBase0.png" id="2_tuyoq"]
@@ -35,6 +35,10 @@
 [ext_resource type="Texture2D" uid="uid://cjms7irammg1y" path="res://assets/images/mace/slam5.png" id="27_cs1tg"]
 [ext_resource type="Texture2D" uid="uid://xs6d3tadwy0e" path="res://assets/images/mace/slam6.png" id="28_2dvfe"]
 [ext_resource type="Texture2D" uid="uid://byiwkgf4wyspu" path="res://assets/images/sword/swing6.png" id="28_md1ol"]
+[ext_resource type="AudioStream" uid="uid://cdydirksjep4m" path="res://assets/sounds/sword.mp3" id="36_j2b1d"]
+[ext_resource type="AudioStream" uid="uid://vh6r07rf6d41" path="res://assets/sounds/mace.mp3" id="37_cs1tg"]
+[ext_resource type="AudioStream" uid="uid://xcglolgw02q1" path="res://assets/sounds/gun.mp3" id="38_2dvfe"]
+[ext_resource type="AudioStream" uid="uid://by4fo7q5e31nj" path="res://assets/sounds/hurt.mp3" id="39_giy8y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
 radius = 97.0
@@ -307,6 +311,21 @@ position = Vector2(69.49999, 4.9999905)
 scale = Vector2(0.6599998, 0.4933333)
 sprite_frames = SubResource("SpriteFrames_i4ail")
 animation = &"sword"
+
+[node name="SwordSound" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("36_j2b1d")
+volume_db = -10.209
+
+[node name="MaceSound" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("37_cs1tg")
+volume_db = -10.209
+
+[node name="GunSound" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("38_2dvfe")
+volume_db = -8.933
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("39_giy8y")
 
 [connection signal="body_entered" from="Player/MaceHitbox" to="Player" method="_on_mace_hitbox_body_entered"]
 [connection signal="body_entered" from="Player/WeaponPivot/SwordHitbox" to="Player" method="_on_sword_hitbox_body_entered"]

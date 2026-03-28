@@ -19,6 +19,7 @@ config/icon="uid://bg1hexqm1fj4c"
 
 GameManager="*res://scripts/game_manager.gd"
 Hud="*res://scenes/HUD.tscn"
+AudioManager="*res://scenes/audio_manager.tscn"
 
 [display]
 

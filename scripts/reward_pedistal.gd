@@ -25,6 +25,7 @@ func _ready():
 			sprite.texture = tex_max_hp
 
 func _on_body_entered(body):
+	AudioManager.play_item()
 	if is_collected: return
 	if body.name == "Player":
 		if is_collected: return

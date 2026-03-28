@@ -1,0 +1,34 @@
+[gd_scene load_steps=9 format=3 uid="uid://8rauilb5y2rh"]
+
+[ext_resource type="Script" uid="uid://c1mmrmvrb332" path="res://scripts/audio_manager.gd" id="1_m6ggh"]
+[ext_resource type="AudioStream" uid="uid://baf0sq0mwm8p" path="res://assets/music/background.mp3" id="2_aoitu"]
+[ext_resource type="AudioStream" uid="uid://ddi00hl5u83d6" path="res://assets/music/boss.mp3" id="3_njtn3"]
+[ext_resource type="AudioStream" uid="uid://nnmcs18y3aan" path="res://assets/sounds/victory.mp3" id="4_kq7b2"]
+[ext_resource type="AudioStream" uid="uid://c6w3l2o5xiipj" path="res://assets/music/menu.mp3" id="5_njtn3"]
+[ext_resource type="AudioStream" uid="uid://chpa2e3k02xkq" path="res://assets/sounds/gameover.mp3" id="6_kq7b2"]
+[ext_resource type="AudioStream" uid="uid://pkt73abcmil4" path="res://assets/sounds/select.mp3" id="7_kq7b2"]
+[ext_resource type="AudioStream" uid="uid://c1e5gyidoflhh" path="res://assets/sounds/itemPickup.mp3" id="8_02gw7"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_m6ggh")
+
+[node name="BgMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_aoitu")
+
+[node name="BossMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_njtn3")
+
+[node name="VictoryMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_kq7b2")
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_njtn3")
+
+[node name="GameOverMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_kq7b2")
+
+[node name="SelectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_kq7b2")
+
+[node name="ItemPickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_02gw7")

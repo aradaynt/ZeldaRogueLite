@@ -28,6 +28,10 @@ var bullet_scene = preload("res://scenes/bullet.tscn")
 @onready var weapon_pivot = $WeaponPivot
 @onready var sword_collision = $WeaponPivot/SwordHitbox/CollisionShape2D
 @onready var mace_collision = $MaceHitbox/CollisionShape2D
+@onready var sword_sound = $SwordSound
+@onready var mace_sound = $MaceSound
+@onready var gun_sound = $GunSound
+@onready var hurt_sound = $HurtSound
 
 func _ready():
 	if GameManager.equipped_weapon != "":
@@ -114,6 +118,7 @@ func attack():
 	
 	match current_weapon:
 		Weapon.SWORD:
+			sword_sound.play()
 			print("Swung sword in direction ", facing_direction, " for ", get_total_damage(), " damage")
 			sword_collision.disabled = false
 			$WeaponPivot/SwordHitbox/WeaponAnim.visible = true
@@ -122,6 +127,7 @@ func attack():
 			$WeaponPivot/SwordHitbox/WeaponAnim.visible = false
 			sword_collision.disabled = true
 		Weapon.MACE:
+			mace_sound.play()
 			print("Slammed mace around Lonk for ", get_total_damage(), " damage")
 			mace_collision.disabled = false
 			$MaceHitbox/MaceAnim.visible = true
@@ -132,6 +138,7 @@ func attack():
 		Weapon.GUN:
 			if current_ammo > 0:
 				current_ammo -= 1
+				gun_sound.play()
 				print("Shot bullet in direction ", facing_direction, "! Ammo left ", current_ammo)
 				var new_bullet = bullet_scene.instantiate()
 				
@@ -170,6 +177,7 @@ func take_damage(amount, source_position):
 	if is_invincible:
 		return
 	
+	hurt_sound.play()
 	current_hp -= amount
 	print("Lonk took Damage! HP left: ", current_hp)
 	GameManager.player_current_hp = current_hp

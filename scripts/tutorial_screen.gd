@@ -2,6 +2,7 @@ extends CanvasLayer
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
+		AudioManager.play_select()
 		start_journey()
 
 func start_journey():

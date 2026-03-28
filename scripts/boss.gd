@@ -19,6 +19,7 @@ var reward_scene = preload("res://scenes/final_Reward.tscn")
 @onready var anim = $AnimatedSprite2D
 @onready var danger_icon = $DangerIcon
 @onready var scythe_collision = $ScytheHitbox/CollisionShape2D
+@onready var hurt_sound = $BossHurt
 
 
 func _ready():
@@ -103,6 +104,7 @@ func spawn_spirits():
 		get_tree().current_scene.add_child(new_spirit)
 
 func take_damage(amount, _source_position):
+	hurt_sound.play()
 	current_hp -= amount
 	health_bar.value = current_hp
 	print("Boss took damage! HP: ", current_hp)

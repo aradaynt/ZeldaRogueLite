@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cn03hd448xs5d"]
+[gd_scene load_steps=12 format=3 uid="uid://cn03hd448xs5d"]
 
 [ext_resource type="Script" uid="uid://c8yuw6uawkgds" path="res://scripts/enemy.gd" id="1_55jtl"]
 [ext_resource type="Texture2D" uid="uid://dux8mpvu6r3h0" path="res://assets/images/robot000.png" id="2_md0e3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bek3syvmfxqpp" path="res://assets/images/robot002.png" id="4_nenq2"]
 [ext_resource type="Texture2D" uid="uid://bfi8vr7m47naw" path="res://assets/images/robot003.png" id="5_md484"]
 [ext_resource type="Texture2D" uid="uid://btn7jfepwjyrr" path="res://assets/images/robot004.png" id="6_ipns3"]
+[ext_resource type="AudioStream" uid="uid://dm01xy7st1gnh" path="res://assets/sounds/slimehurt.mp3" id="7_nenq2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8qclf"]
 animations = [{
@@ -73,6 +74,9 @@ shape = SubResource("CircleShape2D_md0e3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 scale = Vector2(0.8, 0.8)
 shape = SubResource("CapsuleShape2D_4ra3w")
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_nenq2")
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]

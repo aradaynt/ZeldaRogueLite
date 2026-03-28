@@ -7,5 +7,6 @@ func _ready():
 func _on_body_entered(body):
 	if body.name == "Player":
 		print("Lonk touched the Fiforce! YOU WIN!")
+		AudioManager.play_victory_music()
 		get_tree().call_deferred("change_scene_to_file","res://scenes/Victory.tscn")
 		queue_free()

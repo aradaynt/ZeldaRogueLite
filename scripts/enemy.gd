@@ -6,6 +6,7 @@ var player = null
 
 var knockback = Vector2.ZERO
 var is_stunned = false
+@onready var hurt_sound = $HurtSound
 
 func _physics_process(delta):
 	if is_stunned:
@@ -29,6 +30,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func take_damage(amount, source_position):
+	hurt_sound.play()
 	hp -=amount
 	print("Enemy took ", amount, " damage. HP left: ", hp)
 	var knockback_direction = (global_position - source_position).normalized()

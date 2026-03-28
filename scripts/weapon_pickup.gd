@@ -20,6 +20,7 @@ func _ready():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		print("Lonk swapped to: ", weapon_name)
+		AudioManager.play_item()
 		
 		GameManager.equipped_weapon = weapon_name
 		
