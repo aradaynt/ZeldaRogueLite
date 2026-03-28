@@ -86,6 +86,8 @@ func spawn_reward():
 
 func _on_reward_picked_up():
 	print("Reward collected! Doors opening...")
+	if not GameManager.cleared_rooms.has(room_name):
+		GameManager.cleared_rooms.append(room_name)
 	call_deferred("unlock_all_doors")
 
 func unlock_all_doors():

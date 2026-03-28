@@ -205,6 +205,4 @@ func take_damage(amount, source_position):
 
 func die():
 	print("Lonk has fallen!")
-	GameManager.reset_run()
-	
 	get_tree().call_deferred("change_scene_to_file", "res://scenes/game_over.tscn")

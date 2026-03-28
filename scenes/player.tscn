@@ -270,6 +270,7 @@ animations = [{
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 z_index = 10
 position = Vector2(1, -4)
+motion_mode = 1
 script = ExtResource("1_g2els")
 attack_cooldown = 0.6
 

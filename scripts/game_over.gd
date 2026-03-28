@@ -15,4 +15,5 @@ func _input(event):
 
 func return_to_menu():
 	print("Heading back to the main menu...")
+	GameManager.reset_run()
 	get_tree().call_deferred("change_scene_to_file", "res://scenes/main_menu.tscn")

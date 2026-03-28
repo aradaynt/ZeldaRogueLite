@@ -52,6 +52,7 @@ height = 88.0
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(0.8, 0.8)
+motion_mode = 1
 script = ExtResource("1_55jtl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
