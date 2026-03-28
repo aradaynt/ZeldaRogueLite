@@ -491,6 +491,7 @@ bg_color = Color(1, 0, 0, 1)
 radius = 21.0
 
 [node name="Boss" type="CharacterBody2D" groups=["enemy"]]
+motion_mode = 1
 script = ExtResource("1_dlmty")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

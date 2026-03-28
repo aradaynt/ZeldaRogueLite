@@ -144,6 +144,7 @@ radius = 8.0
 height = 28.0
 
 [node name="Spirit" type="CharacterBody2D" groups=["enemy"]]
+motion_mode = 1
 script = ExtResource("1_ihfss")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

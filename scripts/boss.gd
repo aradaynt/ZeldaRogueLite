@@ -64,6 +64,8 @@ func _physics_process(delta):
 	move_and_slide()
 
 func start_attack():
+	if current_hp <= 0:
+		return
 	current_state = State.TELEGRAPH
 	danger_icon.visible = true
 	
@@ -117,6 +119,7 @@ func take_damage(amount, _source_position):
 		die()
 
 func die():
+	scythe_collision.set_deferred("disabled", true)
 	print("The Boss is defeated!")
 	current_state = State.TELEGRAPH
 	velocity = Vector2.ZERO
@@ -136,9 +139,10 @@ func die():
 func _on_hitbox_body_entered(body):
 	if body.name == "Player":
 		body.take_damage(2.0, global_position)
-
-
+		
 func _on_animated_sprite_2d_frame_changed() -> void:
+	if current_hp <=0:
+		return
 	if anim.animation == "attacking":
 		if anim.frame >= 2 and anim.frame <= 10:
 			scythe_collision.disabled = false
@@ -146,8 +150,9 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 			scythe_collision.disabled = true
 	else:
 		scythe_collision.disabled = true
-
-
+		
 func _on_scythe_hitbox_body_entered(body: Node2D) -> void:
+	if current_hp <= 0:
+		return
 	if body.name == "Player":
 		body.take_damage(3.0, global_position)
