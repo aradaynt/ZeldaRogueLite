@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://qfbhqci8khks"]
+
+[ext_resource type="Texture2D" uid="uid://dlbsxof2y8mo" path="res://assets/images/finalreward.png" id="1_gbpcv"]
+[ext_resource type="Script" uid="uid://bwo2ptfllv4qk" path="res://scripts/final_reward.gd" id="1_iltyk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iltyk"]
+radius = 15.0
+
+[node name="FinalReward" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_iltyk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 0)
+texture = ExtResource("1_gbpcv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_iltyk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

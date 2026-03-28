@@ -1,5 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsh1eccehk5vy"]
+[gd_scene load_steps=3 format=3 uid="uid://bsh1eccehk5vy"]
 
 [ext_resource type="PackedScene" uid="uid://bdsqhf5yaphqs" path="res://scenes/base_room.tscn" id="1_eyd1e"]
+[ext_resource type="PackedScene" uid="uid://csivgu6kvmyk7" path="res://scenes/boss.tscn" id="2_hkxnp"]
 
 [node name="TreasureRoom_1" instance=ExtResource("1_eyd1e")]
+is_boss_room = true
+
+[node name="Boss" parent="." index="7" instance=ExtResource("2_hkxnp")]
+position = Vector2(562, 293)
+scale = Vector2(3, 3)

@@ -267,6 +267,7 @@ animations = [{
 z_index = 10
 position = Vector2(1, -4)
 script = ExtResource("1_g2els")
+attack_cooldown = 0.6
 
 [node name="MaceHitbox" type="Area2D" parent="Player"]
 

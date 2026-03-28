@@ -21,8 +21,9 @@ var is_invincible = false
 
 var knockback = Vector2.ZERO
 
-
 var bullet_scene = preload("res://scenes/bullet.tscn")
+
+@export var attack_cooldown = 0.15
 
 @onready var weapon_pivot = $WeaponPivot
 @onready var sword_collision = $WeaponPivot/SwordHitbox/CollisionShape2D
@@ -67,10 +68,10 @@ func _physics_process(delta) -> void:
 				$AnimatedSprite2D.play("still_mace")
 			Weapon.GUN:
 				$AnimatedSprite2D.play("still_gun")
-		velocity = velocity.move_toward(Vector2.ZERO,current_speed)
+		velocity = Vector2.ZERO
 	
 	velocity += knockback
-	knockback = knockback.move_toward(Vector2.ZERO, 2000 * delta)
+	knockback = knockback.move_toward(Vector2.ZERO, 4000 * delta)
 		
 	move_and_slide()
 		
@@ -144,7 +145,7 @@ func attack():
 				print("Out of Ammo.")
 				await get_tree().create_timer(0.1).timeout
 				
-	# await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(attack_cooldown).timeout
 	is_attacking = false
 	
 func reload():
@@ -171,12 +172,14 @@ func take_damage(amount, source_position):
 	
 	current_hp -= amount
 	print("Lonk took Damage! HP left: ", current_hp)
+	GameManager.player_current_hp = current_hp
 	
 	var knockback_direction = (global_position - source_position).normalized()
 	knockback = knockback_direction * 800
 	
 	if current_hp<= 0:
 		print("Game Over! Lonk Died.")
+		die()
 	
 	is_invincible = true
 	$AnimatedSprite2D.modulate = Color(1,0,0,0.5)
@@ -191,3 +194,9 @@ func take_damage(amount, source_position):
 	await get_tree().create_timer(0.2).timeout
 	$AnimatedSprite2D.modulate = Color(1,1,1,1)
 	is_invincible = false
+
+func die():
+	print("Lonk has fallen!")
+	GameManager.reset_run()
+	
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/game_over.tscn")

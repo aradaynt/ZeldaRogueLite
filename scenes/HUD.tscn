@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0ou0e6wfjapq"]
+[gd_scene load_steps=4 format=3 uid="uid://d0ou0e6wfjapq"]
 
 [ext_resource type="Script" uid="uid://bl30qqycwuoq7" path="res://scripts/hud.gd" id="1_fls4u"]
 [ext_resource type="Texture2D" uid="uid://c1qo12ui54rc2" path="res://assets/images/heart.png" id="2_1etfg"]
+[ext_resource type="Script" uid="uid://ouduxjutrklw" path="res://scripts/map_renderer.gd" id="3_1etfg"]
 
 [node name="Hud" type="Control"]
 layout_mode = 3
@@ -19,8 +20,8 @@ anchors_preset = -1
 anchor_right = 0.035
 anchor_bottom = 0.062000003
 offset_left = 8.0
-offset_top = 571.0
-offset_right = 111.68
+offset_top = 582.0
+offset_right = 112.68
 offset_bottom = 595.824
 
 [node name="HPLabel" type="Label" parent="CanvasLayer/HBoxContainer"]
@@ -48,3 +49,21 @@ offset_right = -12.0
 offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="MinimapBackground" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_bottom = 120.0
+grow_horizontal = 0
+color = Color(1, 1, 1, 0.39215687)
+
+[node name="MapRenderer" type="Control" parent="CanvasLayer/MinimapBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_1etfg")

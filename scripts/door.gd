@@ -26,11 +26,7 @@ func _ready():
 		solid_blocker.set_deferred("disabled", false) 
 	else:
 		fake_wall_map.visible = false
-		
-		if is_back_door and loot_icon:
-			loot_icon.visible = false
 		door_sprite.modulate = Color(0.3, 0.3, 0.3)
-		
 		if is_locked:
 			solid_blocker.set_deferred("disabled", false)
 		else:
@@ -44,6 +40,14 @@ func unlock():
 	door_sprite.modulate = Color(1, 1, 1) 
 	solid_blocker.set_deferred("disabled", true)
 
+func get_direction_vector() -> Vector2:
+	match door_direction:
+		"Top": return Vector2.UP 
+		"Bottom": return Vector2.DOWN
+		"Left": return Vector2.LEFT 
+		"Right": return Vector2.RIGHT 
+	return Vector2.ZERO
+
 func _on_body_entered(body):
 	if not is_locked and body.is_in_group("player"):
 		if next_room_path != "":
@@ -53,12 +57,13 @@ func _on_body_entered(body):
 				"Left": GameManager.target_spawn_door = "DoorRight"
 				"Right": GameManager.target_spawn_door = "DoorLeft"
 				
-			if not is_back_door:
-				GameManager.pending_reward = promised_reward
-				GameManager.current_floor += 1
+			GameManager.current_room_coords += get_direction_vector()
+			
+			var target_room_name = "room_" + str(GameManager.current_room_coords.x) + "_" + str(GameManager.current_room_coords.y)
+			if GameManager.cleared_rooms.has(target_room_name):
+				GameManager.pending_reward = "" 
 			else:
-				GameManager.pending_reward = ""
-				GameManager.current_floor -= 1
+				GameManager.pending_reward = promised_reward 
 				
 			get_tree().call_deferred("change_scene_to_file", next_room_path)
 		else:
@@ -83,16 +88,21 @@ func configure_door(make_active: bool, path: String, back_door: bool):
 			solid_blocker.set_deferred("disabled", false)
 		else:
 			solid_blocker.set_deferred("disabled", true)
-		if is_back_door:
+			
+		# Look ahead at the coordinate this door leads to
+		var target_coords = GameManager.current_room_coords + get_direction_vector()
+		var target_room_name = "room_" + str(target_coords.x) + "_" + str(target_coords.y)
+		
+		if GameManager.cleared_rooms.has(target_room_name):
 			if loot_icon: loot_icon.visible = false
 		else:
-			var target_floor = GameManager.current_floor + 1
-			if GameManager.floor_rewards.has(target_floor):
-				promised_reward = GameManager.floor_rewards[target_floor]
+			if GameManager.floor_rewards.has(target_coords):
+				promised_reward = GameManager.floor_rewards[target_coords]
 			else:
 				var possible_rewards = ["heal", "max_hp_up", "weapon_upgrade"]
 				promised_reward = possible_rewards.pick_random()
-				GameManager.floor_rewards[target_floor] = promised_reward
+				GameManager.floor_rewards[target_coords] = promised_reward
+				
 			if loot_icon:
 				loot_icon.visible = true
 				match promised_reward:

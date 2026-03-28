@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://dday3sdc8samj"]
+
+[ext_resource type="Script" uid="uid://cf36dx6dqhiq8" path="res://scripts/game_over.gd" id="1_xeevv"]
+
+[node name="GameOver" type="Node2D"]
+
+[node name="GameOverScreen" type="CanvasLayer" parent="."]
+script = ExtResource("1_xeevv")
+
+[node name="ColorRect" type="ColorRect" parent="GameOverScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.78431374)
+
+[node name="CenterContainer" type="CenterContainer" parent="GameOverScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverScreen/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="DeathText" type="Label" parent="GameOverScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 72
+text = "LONK HAS FALLEN!"
+
+[node name="StatsLabel" type="Label" parent="GameOverScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="PromptText" type="Label" parent="GameOverScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Press SPACE to return to Menu"
+horizontal_alignment = 1

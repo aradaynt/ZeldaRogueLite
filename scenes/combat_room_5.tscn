@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://gr3mx5masygt"]
+
+[ext_resource type="PackedScene" uid="uid://bdsqhf5yaphqs" path="res://scenes/base_room.tscn" id="1_018jd"]
+[ext_resource type="PackedScene" uid="uid://cn03hd448xs5d" path="res://scenes/enemy.tscn" id="2_1cwjf"]
+
+[node name="CombatRoom_5" instance=ExtResource("1_018jd")]
+
+[node name="Enemy" parent="." index="7" instance=ExtResource("2_1cwjf")]
+position = Vector2(276, 262)
+
+[node name="Enemy2" parent="." index="8" instance=ExtResource("2_1cwjf")]
+position = Vector2(381, 350)
+
+[node name="Enemy3" parent="." index="9" instance=ExtResource("2_1cwjf")]
+position = Vector2(483, 269)
+
+[node name="Enemy4" parent="." index="10" instance=ExtResource("2_1cwjf")]
+position = Vector2(612, 352)
+
+[node name="Enemy5" parent="." index="11" instance=ExtResource("2_1cwjf")]
+position = Vector2(714, 270)
+
+[node name="Enemy6" parent="." index="12" instance=ExtResource("2_1cwjf")]
+position = Vector2(818, 345)
