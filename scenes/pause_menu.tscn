@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmtrk3vnwnys"]
+
+[ext_resource type="Script" uid="uid://dh2rjhdfno4d7" path="res://scripts/pause_menu.gd" id="1_n87rw"]
+[ext_resource type="Script" uid="uid://dlc34n88y6rg5" path="res://scripts/h_slider.gd" id="2_kukqi"]
+[ext_resource type="Texture2D" uid="uid://ddkqeycwyxwvd" path="res://assets/images/volume.png" id="3_5d2l8"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_n87rw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45882353)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Paused"
+
+[node name="ContinueButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Continue"
+
+[node name="RestartButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Restart"
+
+[node name="HSlider" type="HSlider" parent="."]
+process_mode = 3
+offset_left = 80.0
+offset_top = 32.0
+offset_right = 306.0
+offset_bottom = 94.0
+max_value = 1.0
+step = 0.05
+script = ExtResource("2_kukqi")
+
+[node name="Sprite2D" type="Sprite2D" parent="HSlider"]
+position = Vector2(-41, 29.000004)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_5d2l8")
+
+[node name="ColorRect" type="ColorRect" parent="HSlider"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.2509804)
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="value_changed" from="HSlider" to="HSlider" method="_on_value_changed"]
