@@ -41,12 +41,22 @@ func generate_dungeon(target_rooms):
 	var farthest_pos = walker_pos
 	var max_dist = 0.0
 	
+	var last_placed_room = ""
+	
 	while rooms_placed < target_rooms:
 		var direction = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT].pick_random()
 		walker_pos += direction
 
 		if not map_grid.has(walker_pos):
-			map_grid[walker_pos] = combat_rooms.pick_random()
+			var available_rooms = combat_rooms.duplicate()
+			
+			if last_placed_room != "":
+				available_rooms.erase(last_placed_room)
+				
+			var chosen_room = available_rooms.pick_random()
+			map_grid[walker_pos] = chosen_room
+			last_placed_room = chosen_room
+			
 			rooms_placed += 1
 			
 			var dist = walker_pos.length_squared()

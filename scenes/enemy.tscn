@@ -44,7 +44,7 @@ radius = 23.0
 height = 75.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_md0e3"]
-radius = 473.00424
+radius = 595.02094
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ra3w"]
 radius = 29.0
@@ -53,6 +53,7 @@ height = 88.0
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(0.8, 0.8)
 motion_mode = 1
+safe_margin = 0.5
 script = ExtResource("1_55jtl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -78,6 +79,8 @@ shape = SubResource("CapsuleShape2D_4ra3w")
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_nenq2")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]

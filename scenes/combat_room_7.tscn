@@ -1,109 +1,118 @@
-[gd_scene load_steps=4 format=3 uid="uid://bv84rucx0x8wf"]
+[gd_scene load_steps=5 format=3 uid="uid://bv84rucx0x8wf"]
 
 [ext_resource type="PackedScene" uid="uid://bdsqhf5yaphqs" path="res://scenes/base_room.tscn" id="1_22yom"]
 [ext_resource type="PackedScene" uid="uid://oylrsggamqf6" path="res://scenes/pillar.tscn" id="2_puy11"]
 [ext_resource type="PackedScene" uid="uid://cn03hd448xs5d" path="res://scenes/enemy.tscn" id="3_puy11"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_puy11"]
+vertices = PackedVector2Array(740, 261, 532, 261, 506, 237, 535, 237, 988, 527, 1063.7969, 551.02344, 87.03906, 551.96875, 858, 527, 986, 237, 986, 107, 1060.1875, 89.953125, 988, 397, 87.953125, 88.03906, 535, 107, 500, 375, 532, 401, 373, 401, 370, 375, 500, 261, 295, 237, 418, 260, 776, 309, 777, 309, 777, 382, 740, 375, 907, 252, 906, 252, 906, 237, 907, 397, 907, 396, 777, 396, 777, 397, 662, 397, 662, 375, 506, 107, 345, 107, 345, 103, 215, 103, 215, 105, 135, 105, 135, 175, 134, 175, 134, 305, 136, 305, 136, 313, 135, 313, 135, 383, 134, 383, 264, 513, 264, 443, 265, 443, 291, 532, 265, 373, 266, 373, 288, 374, 291, 402, 266, 243, 264, 243, 264, 235, 265, 235, 265, 233, 295, 233, 418, 261, 288, 260, 370, 374, 373, 402, 421, 532, 421, 531, 583, 531, 583, 529, 664, 529, 664, 527, 824, 527, 824, 526, 858, 526, 134, 513, 907, 382, 776, 237)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 5, 11), PackedInt32Array(12, 10, 9, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(1, 15, 14, 18, 2), PackedInt32Array(19, 2, 18, 20), PackedInt32Array(21, 22, 23, 24), PackedInt32Array(25, 26, 27, 8), PackedInt32Array(11, 28, 29), PackedInt32Array(30, 31, 32, 33, 24), PackedInt32Array(34, 35, 36), PackedInt32Array(37, 38, 39, 12), PackedInt32Array(39, 40, 41, 12), PackedInt32Array(42, 43, 44, 45), PackedInt32Array(45, 46, 47, 12, 42), PackedInt32Array(48, 49, 50, 51), PackedInt32Array(50, 52, 53, 54, 55, 51), PackedInt32Array(56, 57, 58, 59, 19), PackedInt32Array(59, 60, 61, 19), PackedInt32Array(18, 62, 20), PackedInt32Array(19, 20, 63, 56), PackedInt32Array(53, 56, 63, 54), PackedInt32Array(54, 64, 17, 55), PackedInt32Array(16, 65, 55, 17), PackedInt32Array(66, 67, 68), PackedInt32Array(68, 69, 70), PackedInt32Array(70, 71, 72), PackedInt32Array(72, 73, 74, 7), PackedInt32Array(70, 72, 7, 6, 68), PackedInt32Array(66, 68, 6), PackedInt32Array(51, 66, 6), PackedInt32Array(48, 51, 6, 75), PackedInt32Array(75, 6, 12, 47), PackedInt32Array(41, 42, 12), PackedInt32Array(76, 25, 8, 11), PackedInt32Array(5, 4, 11), PackedInt32Array(76, 11, 29, 23), PackedInt32Array(23, 29, 30), PackedInt32Array(23, 30, 24), PackedInt32Array(21, 24, 0, 77), PackedInt32Array(3, 77, 0), PackedInt32Array(13, 3, 2, 34), PackedInt32Array(12, 13, 34, 36), PackedInt32Array(12, 36, 37)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(63, 63, 1085, 65, 1089, 576, 62, 577)])
+agent_radius = 25.0
+
 [node name="CombatRoom_7" instance=ExtResource("1_22yom")]
 
-[node name="Player" parent="." index="5"]
-position = Vector2(260, 528)
+[node name="NavigationRegion2D" parent="." index="1"]
+navigation_polygon = SubResource("NavigationPolygon_puy11")
 
-[node name="RewardSpawn" parent="." index="6"]
-position = Vector2(519, 252)
-
-[node name="Pillar2" parent="." index="7" instance=ExtResource("2_puy11")]
+[node name="Pillar2" parent="NavigationRegion2D" index="0" instance=ExtResource("2_puy11")]
 position = Vector2(160, 130)
 
-[node name="Pillar" parent="." index="8" instance=ExtResource("2_puy11")]
+[node name="Pillar" parent="NavigationRegion2D" index="1" instance=ExtResource("2_puy11")]
 position = Vector2(159, 200)
 
-[node name="Pillar3" parent="." index="9" instance=ExtResource("2_puy11")]
+[node name="Pillar3" parent="NavigationRegion2D" index="2" instance=ExtResource("2_puy11")]
 position = Vector2(161, 268)
 
-[node name="Pillar4" parent="." index="10" instance=ExtResource("2_puy11")]
+[node name="Pillar4" parent="NavigationRegion2D" index="3" instance=ExtResource("2_puy11")]
 position = Vector2(160, 338)
 
-[node name="Pillar5" parent="." index="11" instance=ExtResource("2_puy11")]
+[node name="Pillar5" parent="NavigationRegion2D" index="4" instance=ExtResource("2_puy11")]
 position = Vector2(159, 408)
 
-[node name="Pillar6" parent="." index="12" instance=ExtResource("2_puy11")]
+[node name="Pillar6" parent="NavigationRegion2D" index="5" instance=ExtResource("2_puy11")]
 position = Vector2(316, 427)
 
-[node name="Pillar7" parent="." index="13" instance=ExtResource("2_puy11")]
+[node name="Pillar7" parent="NavigationRegion2D" index="6" instance=ExtResource("2_puy11")]
 position = Vector2(313, 285)
 scale = Vector2(1, 0.8)
 
-[node name="Pillar8" parent="." index="14" instance=ExtResource("2_puy11")]
+[node name="Pillar8" parent="NavigationRegion2D" index="7" instance=ExtResource("2_puy11")]
 position = Vector2(320, 132)
 
-[node name="Pillar9" parent="." index="15" instance=ExtResource("2_puy11")]
+[node name="Pillar9" parent="NavigationRegion2D" index="8" instance=ExtResource("2_puy11")]
 position = Vector2(240, 128)
 
-[node name="Pillar10" parent="." index="16" instance=ExtResource("2_puy11")]
+[node name="Pillar10" parent="NavigationRegion2D" index="9" instance=ExtResource("2_puy11")]
 position = Vector2(395, 286)
 scale = Vector2(1, 0.8)
 
-[node name="Pillar11" parent="." index="17" instance=ExtResource("2_puy11")]
+[node name="Pillar11" parent="NavigationRegion2D" index="10" instance=ExtResource("2_puy11")]
 position = Vector2(398, 426)
 
-[node name="Pillar12" parent="." index="18" instance=ExtResource("2_puy11")]
+[node name="Pillar12" parent="NavigationRegion2D" index="11" instance=ExtResource("2_puy11")]
 position = Vector2(478, 426)
 
-[node name="Pillar13" parent="." index="19" instance=ExtResource("2_puy11")]
+[node name="Pillar13" parent="NavigationRegion2D" index="12" instance=ExtResource("2_puy11")]
 position = Vector2(401, 132)
 
-[node name="Pillar14" parent="." index="20" instance=ExtResource("2_puy11")]
+[node name="Pillar14" parent="NavigationRegion2D" index="13" instance=ExtResource("2_puy11")]
 position = Vector2(635, 286)
 scale = Vector2(1, 0.8)
 
-[node name="Pillar15" parent="." index="21" instance=ExtResource("2_puy11")]
+[node name="Pillar15" parent="NavigationRegion2D" index="14" instance=ExtResource("2_puy11")]
 position = Vector2(557, 286)
 
-[node name="Pillar17" parent="." index="22" instance=ExtResource("2_puy11")]
+[node name="Pillar17" parent="NavigationRegion2D" index="15" instance=ExtResource("2_puy11")]
 position = Vector2(557, 356)
 
-[node name="Pillar16" parent="." index="23" instance=ExtResource("2_puy11")]
+[node name="Pillar16" parent="NavigationRegion2D" index="16" instance=ExtResource("2_puy11")]
 position = Vector2(559, 424)
 
-[node name="Pillar18" parent="." index="24" instance=ExtResource("2_puy11")]
+[node name="Pillar18" parent="NavigationRegion2D" index="17" instance=ExtResource("2_puy11")]
 position = Vector2(639, 422)
 
-[node name="Pillar19" parent="." index="25" instance=ExtResource("2_puy11")]
+[node name="Pillar19" parent="NavigationRegion2D" index="18" instance=ExtResource("2_puy11")]
 position = Vector2(719, 132)
 
-[node name="Pillar20" parent="." index="26" instance=ExtResource("2_puy11")]
+[node name="Pillar20" parent="NavigationRegion2D" index="19" instance=ExtResource("2_puy11")]
 position = Vector2(560, 132)
 
-[node name="Pillar21" parent="." index="27" instance=ExtResource("2_puy11")]
+[node name="Pillar21" parent="NavigationRegion2D" index="20" instance=ExtResource("2_puy11")]
 position = Vector2(639, 132)
 
-[node name="Pillar22" parent="." index="28" instance=ExtResource("2_puy11")]
+[node name="Pillar22" parent="NavigationRegion2D" index="21" instance=ExtResource("2_puy11")]
 position = Vector2(719, 422)
 
-[node name="Pillar23" parent="." index="29" instance=ExtResource("2_puy11")]
+[node name="Pillar23" parent="NavigationRegion2D" index="22" instance=ExtResource("2_puy11")]
 position = Vector2(801, 132)
 
-[node name="Pillar24" parent="." index="30" instance=ExtResource("2_puy11")]
+[node name="Pillar24" parent="NavigationRegion2D" index="23" instance=ExtResource("2_puy11")]
 position = Vector2(801, 204)
 
-[node name="Pillar25" parent="." index="31" instance=ExtResource("2_puy11")]
+[node name="Pillar25" parent="NavigationRegion2D" index="24" instance=ExtResource("2_puy11")]
 position = Vector2(802, 277)
 
-[node name="Pillar26" parent="." index="32" instance=ExtResource("2_puy11")]
+[node name="Pillar26" parent="NavigationRegion2D" index="25" instance=ExtResource("2_puy11")]
 position = Vector2(802, 421)
 
-[node name="Pillar27" parent="." index="33" instance=ExtResource("2_puy11")]
+[node name="Pillar27" parent="NavigationRegion2D" index="26" instance=ExtResource("2_puy11")]
 position = Vector2(883, 422)
 
-[node name="Pillar28" parent="." index="34" instance=ExtResource("2_puy11")]
+[node name="Pillar28" parent="NavigationRegion2D" index="27" instance=ExtResource("2_puy11")]
 position = Vector2(881, 132)
 
-[node name="Enemy" parent="." index="35" instance=ExtResource("3_puy11")]
+[node name="Player" parent="." index="6"]
+position = Vector2(260, 528)
+
+[node name="Enemy" parent="." index="7" instance=ExtResource("3_puy11")]
 position = Vector2(514, 381)
 
-[node name="Enemy2" parent="." index="36" instance=ExtResource("3_puy11")]
+[node name="Enemy2" parent="." index="8" instance=ExtResource("3_puy11")]
 position = Vector2(675, 394)
 
-[node name="Enemy3" parent="." index="37" instance=ExtResource("3_puy11")]
+[node name="Enemy3" parent="." index="9" instance=ExtResource("3_puy11")]
 position = Vector2(652, 242)
+
+[node name="RewardSpawn" parent="." index="10"]
+position = Vector2(519, 252)

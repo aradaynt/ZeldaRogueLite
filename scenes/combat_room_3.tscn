@@ -1,46 +1,52 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfa8g6cwe5j0t"]
+[gd_scene load_steps=5 format=3 uid="uid://bfa8g6cwe5j0t"]
 
 [ext_resource type="PackedScene" uid="uid://bdsqhf5yaphqs" path="res://scenes/base_room.tscn" id="1_j7de1"]
 [ext_resource type="PackedScene" uid="uid://oylrsggamqf6" path="res://scenes/pillar.tscn" id="2_tcmr0"]
 [ext_resource type="PackedScene" uid="uid://cn03hd448xs5d" path="res://scenes/enemy.tscn" id="3_1k4w3"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_1k4w3"]
+vertices = PackedVector2Array(625, 272, 774, 371, 644, 371, 438, 370, 495, 272, 265, 522, 570, 504, 644, 501, 774, 501, 880, 511, 87.140625, 549.02344, 1010, 511, 1062, 549.96875, 880, 381, 747, 253, 877, 253, 1010, 381, 438, 240, 308, 240, 271, 226, 271, 96, 495, 142, 440, 504, 135, 522, 877, 123, 1062, 88.953125, 89.85156, 87.03906, 135, 392, 625, 142, 747, 123, 440, 374, 265, 392, 308, 370, 570, 374, 141, 226, 141, 96)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9), PackedInt32Array(10, 5, 9, 11, 12), PackedInt32Array(13, 1, 0, 14, 15, 16), PackedInt32Array(17, 18, 19, 20, 21), PackedInt32Array(22, 6, 5), PackedInt32Array(23, 5, 10), PackedInt32Array(15, 24, 25, 16), PackedInt32Array(26, 25, 24, 20), PackedInt32Array(25, 12, 11, 16), PackedInt32Array(23, 10, 26, 27), PackedInt32Array(14, 0, 28, 29), PackedInt32Array(3, 30, 22, 5, 31, 32), PackedInt32Array(13, 9, 8, 1), PackedInt32Array(4, 3, 17, 21), PackedInt32Array(7, 6, 33, 2), PackedInt32Array(3, 2, 33, 30), PackedInt32Array(34, 19, 18, 32, 31, 27), PackedInt32Array(34, 27, 26, 35), PackedInt32Array(28, 21, 20, 29), PackedInt32Array(20, 35, 26), PackedInt32Array(20, 24, 29)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(65, 62, 1087, 64, 1087, 575, 62, 574)])
+agent_radius = 25.0
+
 [node name="CombatRoom_3" instance=ExtResource("1_j7de1")]
 
-[node name="Player" parent="." index="5"]
-position = Vector2(226, 249)
+[node name="NavigationRegion2D" parent="." index="1"]
+navigation_polygon = SubResource("NavigationPolygon_1k4w3")
 
-[node name="Pillar" parent="." index="6" instance=ExtResource("2_tcmr0")]
+[node name="Pillar" parent="NavigationRegion2D" index="0" instance=ExtResource("2_tcmr0")]
 position = Vector2(160, 417)
 
-[node name="Pillar2" parent="." index="7" instance=ExtResource("2_tcmr0")]
+[node name="Pillar2" parent="NavigationRegion2D" index="1" instance=ExtResource("2_tcmr0")]
 position = Vector2(166, 121)
 
-[node name="Pillar3" parent="." index="8" instance=ExtResource("2_tcmr0")]
+[node name="Pillar3" parent="NavigationRegion2D" index="2" instance=ExtResource("2_tcmr0")]
 position = Vector2(333, 265)
 
-[node name="Pillar4" parent="." index="9" instance=ExtResource("2_tcmr0")]
+[node name="Pillar4" parent="NavigationRegion2D" index="3" instance=ExtResource("2_tcmr0")]
 position = Vector2(520, 167)
 
-[node name="Pillar5" parent="." index="10" instance=ExtResource("2_tcmr0")]
+[node name="Pillar5" parent="NavigationRegion2D" index="4" instance=ExtResource("2_tcmr0")]
 position = Vector2(669, 396)
 
-[node name="Pillar6" parent="." index="11" instance=ExtResource("2_tcmr0")]
+[node name="Pillar6" parent="NavigationRegion2D" index="5" instance=ExtResource("2_tcmr0")]
 position = Vector2(772, 148)
 
-[node name="Pillar7" parent="." index="12" instance=ExtResource("2_tcmr0")]
+[node name="Pillar7" parent="NavigationRegion2D" index="6" instance=ExtResource("2_tcmr0")]
 position = Vector2(905, 406)
 
-[node name="Pillar8" parent="." index="13" instance=ExtResource("2_tcmr0")]
+[node name="Pillar8" parent="NavigationRegion2D" index="7" instance=ExtResource("2_tcmr0")]
 position = Vector2(465, 399)
 
-[node name="Enemy" parent="." index="14" instance=ExtResource("3_1k4w3")]
+[node name="Enemy" parent="." index="6" instance=ExtResource("3_1k4w3")]
 position = Vector2(461, 300)
 
-[node name="Enemy2" parent="." index="15" instance=ExtResource("3_1k4w3")]
+[node name="Enemy2" parent="." index="7" instance=ExtResource("3_1k4w3")]
 position = Vector2(803, 441)
 
-[node name="Enemy3" parent="." index="16" instance=ExtResource("3_1k4w3")]
+[node name="Enemy3" parent="." index="8" instance=ExtResource("3_1k4w3")]
 position = Vector2(168, 533)
 
-[node name="Marker2D" parent="." index="17"]
-position = Vector2(592, 326)
+[node name="Player" parent="." index="9"]
+position = Vector2(226, 249)

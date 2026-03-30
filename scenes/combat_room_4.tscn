@@ -1,79 +1,88 @@
-[gd_scene load_steps=4 format=3 uid="uid://chsefawss5y7t"]
+[gd_scene load_steps=5 format=3 uid="uid://chsefawss5y7t"]
 
 [ext_resource type="PackedScene" uid="uid://bdsqhf5yaphqs" path="res://scenes/base_room.tscn" id="1_x13qg"]
 [ext_resource type="PackedScene" uid="uid://oylrsggamqf6" path="res://scenes/pillar.tscn" id="2_b0smm"]
 [ext_resource type="PackedScene" uid="uid://cn03hd448xs5d" path="res://scenes/enemy.tscn" id="3_vry42"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_vry42"]
+vertices = PackedVector2Array(1008, 255, 1008, 125, 1062, 88, 1062, 549.02344, 87, 88, 396, 125, 1008, 491, 87, 549.96875, 447, 492, 396, 361, 396, 362, 156, 362, 156, 256, 447, 491, 156, 492, 396, 126, 156, 126, 447, 256, 447, 255, 1008, 361)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1, 5), PackedInt32Array(6, 3, 7, 8), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(8, 13, 6), PackedInt32Array(14, 8, 7), PackedInt32Array(14, 7, 4, 11), PackedInt32Array(5, 15, 16, 4), PackedInt32Array(17, 18, 0, 19), PackedInt32Array(4, 16, 12), PackedInt32Array(11, 4, 12), PackedInt32Array(9, 12, 17, 19), PackedInt32Array(19, 0, 3), PackedInt32Array(19, 3, 6)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(62, 63, 1087, 63, 1087, 574, 62, 575)])
+agent_radius = 25.0
+
 [node name="CombatRoom_4" instance=ExtResource("1_x13qg")]
 
-[node name="Player" parent="." index="5"]
-position = Vector2(132, 267)
+[node name="NavigationRegion2D" parent="." index="1"]
+navigation_polygon = SubResource("NavigationPolygon_vry42")
 
-[node name="Pillar" parent="." index="6" instance=ExtResource("2_b0smm")]
+[node name="Pillar" parent="NavigationRegion2D" index="0" instance=ExtResource("2_b0smm")]
 position = Vector2(181, 151)
 
-[node name="Pillar" parent="Pillar" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar" parent="NavigationRegion2D/Pillar" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(81, 0)
 
-[node name="Pillar" parent="Pillar/Pillar" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar" parent="NavigationRegion2D/Pillar/Pillar" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(80, 0)
 
-[node name="Pillar2" parent="Pillar/Pillar/Pillar" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar2" parent="NavigationRegion2D/Pillar/Pillar/Pillar" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(79, -1)
 
-[node name="Pillar" parent="Pillar/Pillar/Pillar/Pillar2" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar" parent="NavigationRegion2D/Pillar/Pillar/Pillar/Pillar2" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(81, 0)
 
-[node name="Pillar" parent="Pillar/Pillar/Pillar/Pillar2/Pillar" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar" parent="NavigationRegion2D/Pillar/Pillar/Pillar/Pillar2/Pillar" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(80, 0)
 
-[node name="Pillar3" parent="Pillar/Pillar/Pillar/Pillar2/Pillar/Pillar" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar3" parent="NavigationRegion2D/Pillar/Pillar/Pillar/Pillar2/Pillar/Pillar" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(80, 0)
 
-[node name="Pillar" parent="Pillar/Pillar/Pillar/Pillar2/Pillar/Pillar/Pillar3" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar" parent="NavigationRegion2D/Pillar/Pillar/Pillar/Pillar2/Pillar/Pillar/Pillar3" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(81, 0)
 
-[node name="Pillar" parent="Pillar/Pillar/Pillar/Pillar2/Pillar/Pillar/Pillar3/Pillar" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar" parent="NavigationRegion2D/Pillar/Pillar/Pillar/Pillar2/Pillar/Pillar/Pillar3/Pillar" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(80, 0)
 
-[node name="Pillar" parent="Pillar/Pillar/Pillar/Pillar2/Pillar/Pillar/Pillar3/Pillar/Pillar" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar" parent="NavigationRegion2D/Pillar/Pillar/Pillar/Pillar2/Pillar/Pillar/Pillar3/Pillar/Pillar" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(80, 0)
 
-[node name="Pillar2" parent="." index="7" instance=ExtResource("2_b0smm")]
+[node name="Pillar2" parent="NavigationRegion2D" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(181, 387)
 
-[node name="Pillar" parent="Pillar2" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar" parent="NavigationRegion2D/Pillar2" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(81, 0)
 
-[node name="Pillar" parent="Pillar2/Pillar" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar" parent="NavigationRegion2D/Pillar2/Pillar" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(80, 0)
 
-[node name="Pillar2" parent="Pillar2/Pillar/Pillar" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar2" parent="NavigationRegion2D/Pillar2/Pillar/Pillar" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(79, -1)
 
-[node name="Pillar" parent="Pillar2/Pillar/Pillar/Pillar2" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar" parent="NavigationRegion2D/Pillar2/Pillar/Pillar/Pillar2" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(81, 0)
 
-[node name="Pillar" parent="Pillar2/Pillar/Pillar/Pillar2/Pillar" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar" parent="NavigationRegion2D/Pillar2/Pillar/Pillar/Pillar2/Pillar" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(80, 0)
 
-[node name="Pillar3" parent="Pillar2/Pillar/Pillar/Pillar2/Pillar/Pillar" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar3" parent="NavigationRegion2D/Pillar2/Pillar/Pillar/Pillar2/Pillar/Pillar" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(80, 0)
 
-[node name="Pillar" parent="Pillar2/Pillar/Pillar/Pillar2/Pillar/Pillar/Pillar3" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar" parent="NavigationRegion2D/Pillar2/Pillar/Pillar/Pillar2/Pillar/Pillar/Pillar3" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(81, 0)
 
-[node name="Pillar" parent="Pillar2/Pillar/Pillar/Pillar2/Pillar/Pillar/Pillar3/Pillar" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar" parent="NavigationRegion2D/Pillar2/Pillar/Pillar/Pillar2/Pillar/Pillar/Pillar3/Pillar" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(80, 0)
 
-[node name="Pillar" parent="Pillar2/Pillar/Pillar/Pillar2/Pillar/Pillar/Pillar3/Pillar/Pillar" index="1" instance=ExtResource("2_b0smm")]
+[node name="Pillar" parent="NavigationRegion2D/Pillar2/Pillar/Pillar/Pillar2/Pillar/Pillar/Pillar3/Pillar/Pillar" index="1" instance=ExtResource("2_b0smm")]
 position = Vector2(80, 0)
 
-[node name="Enemy" parent="." index="8" instance=ExtResource("3_vry42")]
+[node name="Enemy" parent="." index="6" instance=ExtResource("3_vry42")]
 position = Vector2(380, 310)
 
-[node name="Enemy2" parent="." index="9" instance=ExtResource("3_vry42")]
+[node name="Enemy2" parent="." index="7" instance=ExtResource("3_vry42")]
 position = Vector2(811, 311)
 
-[node name="Enemy3" parent="." index="10" instance=ExtResource("3_vry42")]
+[node name="Enemy3" parent="." index="8" instance=ExtResource("3_vry42")]
 position = Vector2(566, 309)
+
+[node name="Player" parent="." index="9"]
+position = Vector2(132, 267)

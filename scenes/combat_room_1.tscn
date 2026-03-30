@@ -1,16 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://dh8tp2bhawofr"]
+[gd_scene load_steps=5 format=3 uid="uid://dh8tp2bhawofr"]
 
 [ext_resource type="PackedScene" uid="uid://bdsqhf5yaphqs" path="res://scenes/base_room.tscn" id="1_khdif"]
 [ext_resource type="PackedScene" uid="uid://oylrsggamqf6" path="res://scenes/pillar.tscn" id="2_cv2pq"]
 [ext_resource type="PackedScene" uid="uid://cn03hd448xs5d" path="res://scenes/enemy.tscn" id="3_cv2pq"]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_cv2pq"]
+vertices = PackedVector2Array(87.953125, 550.9219, 385, 370, 698, 363, 828, 363, 1063.1406, 548.0703, 255, 370, 87.03906, 85.07031, 255, 240, 385, 240, 1065.8516, 87.921875, 698, 233, 828, 233)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 1, 0), PackedInt32Array(5, 0, 6, 7), PackedInt32Array(8, 7, 6, 9, 10), PackedInt32Array(9, 4, 3, 11), PackedInt32Array(2, 1, 8, 10), PackedInt32Array(10, 9, 11)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(62, 60, 1091, 63, 1088, 573, 63, 576)])
+agent_radius = 25.0
+
 [node name="CombatRoom_1" instance=ExtResource("1_khdif")]
 
-[node name="Pillar" parent="." index="5" instance=ExtResource("2_cv2pq")]
+[node name="NavigationRegion2D" parent="." index="1"]
+navigation_polygon = SubResource("NavigationPolygon_cv2pq")
+navigation_layers = 3
+
+[node name="Pillar" parent="NavigationRegion2D" index="0" instance=ExtResource("2_cv2pq")]
 position = Vector2(280, 265)
 
-[node name="Pillar2" parent="." index="6" instance=ExtResource("2_cv2pq")]
+[node name="Pillar2" parent="NavigationRegion2D" index="1" instance=ExtResource("2_cv2pq")]
 position = Vector2(723, 258)
 
-[node name="Enemy" parent="." index="7" instance=ExtResource("3_cv2pq")]
+[node name="Enemy" parent="." index="5" instance=ExtResource("3_cv2pq")]
 position = Vector2(559, 334)

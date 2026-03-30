@@ -2,9 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://bhfwk8v2qt57o" path="res://assets/images/character and tileset/Dungeon_Tileset.png" id="1_fv82l"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_01pxi"]
-size = Vector2(80, 79)
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q1crh"]
 texture = ExtResource("1_fv82l")
 0:0/0 = 0
@@ -139,14 +136,17 @@ texture = ExtResource("1_fv82l")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_q1crh")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01pxi"]
+size = Vector2(80, 79)
+
 [node name="Pillar" type="Node2D"]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(40, 39.5)
-shape = SubResource("RectangleShape2D_01pxi")
-
 [node name="TileMapLayer" type="TileMapLayer" parent="StaticBody2D"]
 tile_map_data = PackedByteArray("AAAAAAMAAAAFAAAAAAABAAMAAAAIAAcAAAACAAMAAAAIAAcAAAADAAMAAAAIAAcAAAAAAAAAAAAAAAUAAAAAAAEAAAAFAAIAAAAAAAIAAAAFAAMAAAAAAAQAAAABAAAAAAABAAQAAAACAAAAAAACAAQAAAADAAAAAAADAAQAAAAEAAAAAAAEAAQAAAABAAAAAAAEAAAAAAADAAUAAAAEAAEAAAAAAAEAAAAEAAIAAAAAAAIAAAAEAAMAAAAAAAMAAAABAAAAAAABAAQAAAACAAAAAAACAAQAAAADAAAAAAADAAQAAAABAAEAAAAIAAcAAAABAAIAAAAIAAcAAAACAAEAAAAIAAcAAAACAAIAAAAIAAcAAAADAAEAAAAIAAcAAAADAAIAAAAIAAcAAAA=")
 tile_set = SubResource("TileSet_7rdn4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(40, 39.5)
+shape = SubResource("RectangleShape2D_01pxi")
