@@ -1,16 +1,19 @@
 extends CanvasLayer
 
+var new_pause_state = false
+
 func _ready():
 	hide()
 
 func _input(event):
 	if event.is_action_pressed("pause"):
 		toggle_pause()
-	if event.is_action_pressed("reload"):
-		_on_restart_button_pressed()
+	if new_pause_state:
+		if event.is_action_pressed("reload"):
+			_on_restart_button_pressed()
 
 func toggle_pause():
-	var new_pause_state = not get_tree().paused
+	new_pause_state = not get_tree().paused
 	get_tree().paused = new_pause_state
 	
 	if new_pause_state:

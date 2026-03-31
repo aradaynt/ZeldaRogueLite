@@ -16,6 +16,7 @@ var is_locked = true
 var tex_heal = preload("res://assets/images/heart.png")
 var tex_max_hp = preload("res://assets/images/maxhp.png")
 var tex_weapon = preload("res://assets/images/hammer.png")
+var tex_skull = preload("res://assets/images/skull.png")
 
 func _ready():
 	if not is_active:
@@ -95,19 +96,33 @@ func configure_door(make_active: bool, path: String, back_door: bool):
 		if GameManager.cleared_rooms.has(target_room_name):
 			if loot_icon: loot_icon.visible = false
 		else:
-			if GameManager.floor_rewards.has(target_coords):
-				promised_reward = GameManager.floor_rewards[target_coords]
-			else:
-				var possible_rewards = ["heal", "max_hp_up", "weapon_upgrade"]
-				promised_reward = possible_rewards.pick_random()
-				GameManager.floor_rewards[target_coords] = promised_reward
+			var target_scene = GameManager.map_grid.get(target_coords)
+			
+			if target_scene == GameManager.start_room:
+				if loot_icon: 
+					loot_icon.visible = false
+				promised_reward = "none"
 				
-			if loot_icon:
-				loot_icon.visible = true
-				match promised_reward:
-					"weapon_upgrade":
-						loot_icon.texture = tex_weapon
-					"heal":
-						loot_icon.texture = tex_heal
-					"max_hp_up":
-						loot_icon.texture = tex_max_hp
+			elif target_scene == GameManager.treasure_room:
+				promised_reward = "boss_loot"
+				GameManager.floor_rewards[target_coords] = promised_reward
+				if loot_icon:
+					loot_icon.visible = true
+					loot_icon.texture = tex_skull
+			else:
+				if GameManager.floor_rewards.has(target_coords):
+					promised_reward = GameManager.floor_rewards[target_coords]
+				else:
+					var possible_rewards = ["heal", "max_hp_up", "weapon_upgrade"]
+					promised_reward = possible_rewards.pick_random()
+					GameManager.floor_rewards[target_coords] = promised_reward
+					
+				if loot_icon:
+					loot_icon.visible = true
+					match promised_reward:
+						"weapon_upgrade":
+							loot_icon.texture = tex_weapon
+						"heal":
+							loot_icon.texture = tex_heal
+						"max_hp_up":
+							loot_icon.texture = tex_max_hp

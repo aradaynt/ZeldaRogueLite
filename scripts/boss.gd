@@ -16,6 +16,7 @@ var summon_cooldown_time = 8.0
 var summon_timer = 0.0
 var spirit_scene = preload("res://scenes/spirit.tscn") 
 var reward_scene = preload("res://scenes/final_Reward.tscn")
+var is_dying = false
 
 @onready var health_bar = $ProgressBar
 @onready var anim = $AnimatedSprite2D
@@ -131,7 +132,11 @@ func take_damage(amount, _source_position):
 	is_stunned = false
 
 func die():
+	if is_dying:
+		return
+	is_dying = true
 	scythe_collision.set_deferred("disabled", true)
+	get_tree().call_group("enemy", "die")
 	print("The Boss is defeated!")
 	current_state = State.TELEGRAPH
 	velocity = Vector2.ZERO
