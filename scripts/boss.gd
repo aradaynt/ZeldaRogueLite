@@ -122,7 +122,17 @@ func take_damage(amount, _source_position):
 		var knockback_direction = (global_position - _source_position).normalized()
 		knockback = knockback_direction * 600
 		is_stunned = true
+		await get_tree().create_timer(0.3).timeout
+		is_stunned = false
 	
+	anim.modulate = Color(1, 0, 0)
+	await get_tree().create_timer(0.1).timeout
+	anim.modulate = Color(1, 1, 1)
+	await get_tree().create_timer(0.1).timeout
+	anim.modulate = Color(1, 0, 0)
+	await get_tree().create_timer(0.1).timeout
+	anim.modulate = Color(1, 1, 1)
+	await get_tree().create_timer(0.1).timeout
 	anim.modulate = Color(1, 0, 0)
 	await get_tree().create_timer(0.1).timeout
 	anim.modulate = Color(1, 1, 1)
