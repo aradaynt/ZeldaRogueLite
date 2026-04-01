@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bs23p6relfgp6"]
+
+[ext_resource type="PackedScene" uid="uid://bdsqhf5yaphqs" path="res://scenes/base_room.tscn" id="1_0pe0r"]
+[ext_resource type="PackedScene" uid="uid://oylrsggamqf6" path="res://scenes/pillar.tscn" id="2_4437g"]
+[ext_resource type="PackedScene" uid="uid://cn03hd448xs5d" path="res://scenes/enemy.tscn" id="3_k2k7x"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_e2xux"]
+vertices = PackedVector2Array(343, 498, 1062.1016, 550, 90.046875, 550, 213, 498, 1063.8984, 89.953125, 981, 254, 981, 124, 90.953125, 88.03906, 851, 124, 213, 368, 343, 368, 851, 254)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 5, 6), PackedInt32Array(7, 4, 6, 8), PackedInt32Array(3, 2, 7, 9), PackedInt32Array(10, 9, 7, 8, 11), PackedInt32Array(11, 5, 1, 0, 10)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(66, 63, 1089, 65, 1087, 575, 65, 575)])
+agent_radius = 25.0
+
+[node name="CombatRoom_11" instance=ExtResource("1_0pe0r")]
+
+[node name="NavigationRegion2D" parent="." index="1"]
+navigation_polygon = SubResource("NavigationPolygon_e2xux")
+
+[node name="Pillar" parent="NavigationRegion2D" index="0" instance=ExtResource("2_4437g")]
+position = Vector2(238, 393)
+
+[node name="Pillar2" parent="NavigationRegion2D" index="1" instance=ExtResource("2_4437g")]
+position = Vector2(876, 149)
+
+[node name="PauseMenu" parent="." index="8"]
+visible = false
+
+[node name="Enemy" parent="." index="9" instance=ExtResource("3_k2k7x")]
+position = Vector2(298, 167)
+
+[node name="Enemy2" parent="." index="10" instance=ExtResource("3_k2k7x")]
+position = Vector2(878, 475)

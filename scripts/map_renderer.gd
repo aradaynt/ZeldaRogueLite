@@ -16,5 +16,7 @@ func _draw():
 		var rect = Rect2(center_x + offset_x - (ROOM_SIZE / 2.0), center_y + offset_y - (ROOM_SIZE / 2.0), ROOM_SIZE, ROOM_SIZE)
 		if coords == current_coords:
 			draw_rect(rect, Color(0.2, 0.8, 0.2))
+		elif coords == Vector2.ZERO:
+			draw_rect(rect, Color(0.9, 0.9, 0.1))
 		else:
 			draw_rect(rect, Color(0.7, 0.7, 0.7))

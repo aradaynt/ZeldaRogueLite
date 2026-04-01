@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2d64sfawdwdp"]
+
+[ext_resource type="PackedScene" uid="uid://bdsqhf5yaphqs" path="res://scenes/base_room.tscn" id="1_fcrv7"]
+[ext_resource type="PackedScene" uid="uid://oylrsggamqf6" path="res://scenes/pillar.tscn" id="2_vml84"]
+[ext_resource type="PackedScene" uid="uid://cn03hd448xs5d" path="res://scenes/enemy.tscn" id="3_vml84"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_oiw8c"]
+vertices = PackedVector2Array(88.046875, 550, 353, 494, 491, 492, 621, 492, 774, 499, 904, 499, 1062, 550, 223, 494, 88.953125, 86.07031, 223, 154, 353, 154, 1062, 88.921875, 491, 152, 904, 159, 774, 159, 621, 152)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 0, 4), PackedInt32Array(7, 1, 0), PackedInt32Array(7, 0, 8, 9), PackedInt32Array(10, 9, 8, 11, 12), PackedInt32Array(11, 6, 5, 13), PackedInt32Array(14, 4, 3, 15), PackedInt32Array(2, 1, 10, 12), PackedInt32Array(15, 12, 11), PackedInt32Array(14, 15, 11, 13)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(64, 61, 1087, 64, 1087, 575, 63, 575)])
+agent_radius = 25.0
+
+[node name="CombatRoom_9" instance=ExtResource("1_fcrv7")]
+
+[node name="NavigationRegion2D" parent="." index="1"]
+navigation_polygon = SubResource("NavigationPolygon_oiw8c")
+
+[node name="Pillar" parent="NavigationRegion2D" index="0" instance=ExtResource("2_vml84")]
+position = Vector2(248, 179)
+
+[node name="Pillar" parent="NavigationRegion2D/Pillar" index="1" instance=ExtResource("2_vml84")]
+position = Vector2(0, 70)
+
+[node name="Pillar2" parent="NavigationRegion2D/Pillar/Pillar" index="1" instance=ExtResource("2_vml84")]
+position = Vector2(0, 70)
+
+[node name="Pillar" parent="NavigationRegion2D/Pillar/Pillar/Pillar2" index="1" instance=ExtResource("2_vml84")]
+position = Vector2(0, 70)
+
+[node name="Pillar2" parent="NavigationRegion2D" index="1" instance=ExtResource("2_vml84")]
+position = Vector2(516, 177)
+
+[node name="Pillar" parent="NavigationRegion2D/Pillar2" index="1" instance=ExtResource("2_vml84")]
+position = Vector2(0, 70)
+
+[node name="Pillar2" parent="NavigationRegion2D/Pillar2/Pillar" index="1" instance=ExtResource("2_vml84")]
+position = Vector2(0, 70)
+
+[node name="Pillar" parent="NavigationRegion2D/Pillar2/Pillar/Pillar2" index="1" instance=ExtResource("2_vml84")]
+position = Vector2(0, 70)
+
+[node name="Pillar2" parent="NavigationRegion2D/Pillar2" index="2" instance=ExtResource("2_vml84")]
+position = Vector2(283, 7)
+
+[node name="Pillar" parent="NavigationRegion2D/Pillar2/Pillar2" index="1" instance=ExtResource("2_vml84")]
+position = Vector2(0, 70)
+
+[node name="Pillar2" parent="NavigationRegion2D/Pillar2/Pillar2/Pillar" index="1" instance=ExtResource("2_vml84")]
+position = Vector2(0, 70)
+
+[node name="Pillar" parent="NavigationRegion2D/Pillar2/Pillar2/Pillar/Pillar2" index="1" instance=ExtResource("2_vml84")]
+position = Vector2(0, 70)
+
+[node name="RewardSpawn" parent="." index="7"]
+position = Vector2(421, 293)
+
+[node name="PauseMenu" parent="." index="8"]
+visible = false
+
+[node name="Enemy" parent="." index="9" instance=ExtResource("3_vml84")]
+visible = false
+position = Vector2(415, 295)
+
+[node name="Enemy2" parent="." index="10" instance=ExtResource("3_vml84")]
+visible = false
+position = Vector2(703, 296)

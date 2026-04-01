@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgwn5olf8mtq4"]
+
+[ext_resource type="PackedScene" uid="uid://bdsqhf5yaphqs" path="res://scenes/base_room.tscn" id="1_2iqy7"]
+[ext_resource type="PackedScene" uid="uid://oylrsggamqf6" path="res://scenes/pillar.tscn" id="2_6eamw"]
+[ext_resource type="PackedScene" uid="uid://cn03hd448xs5d" path="res://scenes/enemy.tscn" id="3_6eamw"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_b8015"]
+vertices = PackedVector2Array(624, 472, 1061.1406, 549.02344, 87.953125, 549.96875, 494, 472, 849, 362, 719, 362, 624, 342, 719, 232, 1063.8516, 88.96875, 849, 232, 624, 250, 419, 357, 419, 227, 494, 342, 289, 357, 87.03906, 88.02344, 289, 227, 624, 120, 494, 250, 494, 120)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(5, 0, 6, 7), PackedInt32Array(8, 1, 4, 9), PackedInt32Array(10, 7, 6), PackedInt32Array(11, 12, 13, 3), PackedInt32Array(11, 3, 2, 14), PackedInt32Array(14, 2, 15, 16), PackedInt32Array(7, 10, 17), PackedInt32Array(18, 10, 6, 13), PackedInt32Array(18, 13, 12), PackedInt32Array(19, 18, 12), PackedInt32Array(19, 12, 16, 15), PackedInt32Array(19, 15, 8, 17), PackedInt32Array(17, 8, 9, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(62, 63, 1089, 64, 1086, 574, 63, 575)])
+agent_radius = 25.0
+
+[node name="CombatRoom_10" instance=ExtResource("1_2iqy7")]
+
+[node name="NavigationRegion2D" parent="." index="1"]
+navigation_polygon = SubResource("NavigationPolygon_b8015")
+
+[node name="Pillar" parent="NavigationRegion2D" index="0" instance=ExtResource("2_6eamw")]
+position = Vector2(314, 252)
+
+[node name="Pillar2" parent="NavigationRegion2D" index="1" instance=ExtResource("2_6eamw")]
+position = Vector2(519, 145)
+
+[node name="Pillar3" parent="NavigationRegion2D" index="2" instance=ExtResource("2_6eamw")]
+position = Vector2(744, 257)
+
+[node name="Pillar4" parent="NavigationRegion2D" index="3" instance=ExtResource("2_6eamw")]
+position = Vector2(519, 367)
+
+[node name="PauseMenu" parent="." index="8"]
+visible = false
+
+[node name="Enemy" parent="." index="9" instance=ExtResource("3_6eamw")]
+position = Vector2(460, 293)
+
+[node name="Enemy2" parent="." index="10" instance=ExtResource("3_6eamw")]
+position = Vector2(667, 306)

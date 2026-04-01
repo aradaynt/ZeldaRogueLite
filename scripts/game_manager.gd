@@ -21,7 +21,15 @@ var combat_rooms = [
 	"res://scenes/combat_room_4.tscn",
 	"res://scenes/combat_room_5.tscn",
 	"res://scenes/combat_room_6.tscn",
-	"res://scenes/combat_room_7.tscn"
+	"res://scenes/combat_room_7.tscn",
+	"res://scenes/combat_room_8.tscn",
+	"res://scenes/combat_room_9.tscn",
+	"res://scenes/combat_room_10.tscn",
+	"res://scenes/combat_room_11.tscn",
+	"res://scenes/combat_room_12.tscn",
+	"res://scenes/combat_room_13.tscn",
+	"res://scenes/combat_room_14.tscn",
+	"res://scenes/combat_room_15.tscn"
 ]
 var start_room = "res://scenes/start_room.tscn"
 var treasure_room = "res://scenes/treasure_room_1.tscn"
@@ -33,42 +41,35 @@ func generate_dungeon(target_rooms):
 	map_grid.clear()
 	cleared_rooms.clear()
 	current_room_coords = Vector2.ZERO 
-	
 	var walker_pos = Vector2.ZERO
 	map_grid[walker_pos] = start_room
-	
 	var rooms_placed = 1
 	var farthest_pos = walker_pos
 	var max_dist = 0.0
-	
+	var room_deck: Array = []
 	var last_placed_room = ""
-	
 	while rooms_placed < target_rooms:
 		var direction = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT].pick_random()
 		walker_pos += direction
-
 		if not map_grid.has(walker_pos):
-			var available_rooms = combat_rooms.duplicate()
-			
-			if last_placed_room != "":
-				available_rooms.erase(last_placed_room)
-				
-			var chosen_room = available_rooms.pick_random()
+			if room_deck.is_empty():
+				room_deck = combat_rooms.duplicate()
+				room_deck.shuffle()
+				if room_deck.back() == last_placed_room and room_deck.size() > 1:
+					var temp = room_deck[0]
+					room_deck[0] = room_deck[room_deck.size() - 1]
+					room_deck[room_deck.size() - 1] = temp
+			var chosen_room = room_deck.pop_back()
 			map_grid[walker_pos] = chosen_room
 			last_placed_room = chosen_room
-			
 			rooms_placed += 1
-			
 			var dist = walker_pos.length_squared()
 			if dist > max_dist:
 				max_dist = dist
 				farthest_pos = walker_pos
-				
 	if farthest_pos != Vector2.ZERO:
 		map_grid[farthest_pos] = treasure_room
-		
 	print("New Branching Dungeon Generated! Total rooms: ", map_grid.size())
-	print("Map looks like this: ", map_grid)
 
 func reset_run():
 	player_max_hp = 3.0
