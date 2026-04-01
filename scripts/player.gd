@@ -44,8 +44,11 @@ func _physics_process(delta) -> void:
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
 	if direction != Vector2.ZERO:
-		facing_direction = direction.normalized()
-		weapon_pivot.rotation = facing_direction.angle()
+		# ADDED: Only update where Lonk is aiming if he is NOT currently attacking.
+		# This locks the sword pivot (and gun aim) in place until the attack finishes.
+		if not is_attacking:
+			facing_direction = direction.normalized()
+			weapon_pivot.rotation = facing_direction.angle()
 
 	var current_speed = SPEED
 	if current_weapon == Weapon.MACE and is_attacking:
@@ -132,6 +135,7 @@ func attack():
 			mace_collision.disabled = false
 			$MaceHitbox/MaceAnim.visible = true
 			$MaceHitbox/MaceAnim.play("mace")
+			get_viewport().get_camera_2d().apply_shake(15.0)
 			await get_tree().create_timer(0.5).timeout
 			$MaceHitbox/MaceAnim.visible = false
 			mace_collision.disabled = true
@@ -178,6 +182,7 @@ func take_damage(amount, source_position):
 		return
 	
 	hurt_sound.play()
+	get_viewport().get_camera_2d().apply_shake(10.0)
 	current_hp -= amount
 	print("Lonk took Damage! HP left: ", current_hp)
 	GameManager.player_current_hp = current_hp

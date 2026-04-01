@@ -10,6 +10,8 @@ var is_stunned = false
 
 @onready var nav_agent = $NavigationAgent2D 
 
+var particle_scene = preload("res://scenes/death_particles.tscn")
+
 func _physics_process(delta):
 	if is_stunned:
 		velocity = knockback
@@ -74,6 +76,20 @@ func _on_hurt_box_body_entered(body: Node2D) -> void:
 		body.take_damage(1.0, global_position)
 
 func die():
+	var splat = particle_scene.instantiate()
+	player = get_tree().get_first_node_in_group("player")
+	
+	if player != null:
+		var hit_direction = (global_position - player.global_position).normalized()
+		
+		splat.global_position = global_position + (hit_direction * 20.0)
+		
+		splat.rotation = hit_direction.angle()
+	else:
+		splat.global_position = global_position
+		
+	get_tree().current_scene.add_child(splat)
+	
 	remove_from_group("enemy")
 	
 	var main_node = get_tree().current_scene 

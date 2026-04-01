@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://bdsqhf5yaphqs"]
+[gd_scene load_steps=9 format=4 uid="uid://bdsqhf5yaphqs"]
 
 [ext_resource type="Script" uid="uid://cwp4aevm3fupt" path="res://scripts/main.gd" id="1_hy5rx"]
 [ext_resource type="Texture2D" uid="uid://bhfwk8v2qt57o" path="res://assets/images/character and tileset/Dungeon_Tileset.png" id="1_ont3e"]
 [ext_resource type="PackedScene" uid="uid://dl3fxprpu0up7" path="res://scenes/door.tscn" id="2_1tp4b"]
 [ext_resource type="PackedScene" uid="uid://dhrbo4gci2ne6" path="res://scenes/player.tscn" id="3_1tp4b"]
 [ext_resource type="PackedScene" uid="uid://dmtrk3vnwnys" path="res://scenes/pause_menu.tscn" id="5_b8der"]
+[ext_resource type="Script" uid="uid://c6urdywvq8ca3" path="res://scripts/camera_2d.gd" id="6_gdux6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hy5rx"]
 texture = ExtResource("1_ont3e")
@@ -173,3 +174,7 @@ position = Vector2(560, 499)
 position = Vector2(557, 289)
 
 [node name="PauseMenu" parent="." instance=ExtResource("5_b8der")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 325)
+script = ExtResource("6_gdux6")

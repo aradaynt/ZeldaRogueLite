@@ -234,7 +234,7 @@ radius = 13.0
 height = 62.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
-size = Vector2(33.125, 148)
+size = Vector2(67.5625, 148)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i4ail"]
 animations = [{
@@ -287,6 +287,7 @@ position = Vector2(-3.0000205, 7.9999995)
 scale = Vector2(0.7799999, 0.78000003)
 sprite_frames = SubResource("SpriteFrames_bj30b")
 animation = &"mace"
+speed_scale = 0.5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 scale = Vector2(0.13, 0.13)
@@ -302,14 +303,14 @@ shape = SubResource("CapsuleShape2D_v6fml")
 [node name="SwordHitbox" type="Area2D" parent="Player/WeaponPivot"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/WeaponPivot/SwordHitbox"]
-position = Vector2(70, 5)
+position = Vector2(52.78125, 5)
 shape = SubResource("RectangleShape2D_g2els")
 disabled = true
 
 [node name="WeaponAnim" type="AnimatedSprite2D" parent="Player/WeaponPivot/SwordHitbox"]
 visible = false
-position = Vector2(69.49999, 4.9999905)
-scale = Vector2(0.6599998, 0.4933333)
+position = Vector2(52.999992, 4.9999905)
+scale = Vector2(1.3199997, 0.4933333)
 sprite_frames = SubResource("SpriteFrames_i4ail")
 animation = &"sword"
 

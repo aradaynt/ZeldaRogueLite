@@ -6,16 +6,23 @@ var current_hp = max_hp
 
 var player = null
 
-enum State {CHASE, TELEGRAPH, ATTACK, SUMMON}
+enum State {CHASE, TELEGRAPH, ATTACK, SUMMON, TELEPORT_OUT, TELEPORT_IN, BULLET_RING}
 var current_state = State.CHASE
 var attack_range = 60.0 
 
 var knockback = Vector2.ZERO
 var is_stunned = false
+
 var summon_cooldown_time = 8.0
 var summon_timer = 0.0
+
+var special_attack_cooldown = 5.0
+var special_timer = 0.0
+var dash_direction = Vector2.ZERO
+
 var spirit_scene = preload("res://scenes/spirit.tscn") 
 var reward_scene = preload("res://scenes/final_Reward.tscn")
+var bullet_scene = preload("res://scenes/bullet.tscn")
 var is_dying = false
 
 @onready var health_bar = $ProgressBar
@@ -37,9 +44,16 @@ func _physics_process(delta):
 		return
 		
 	if current_state == State.CHASE:
+		# Summon Logic
 		summon_timer += delta
 		if summon_timer >= summon_cooldown_time:
 			start_summon()
+			return
+			
+		special_timer += delta
+		if special_timer >= special_attack_cooldown:
+			trigger_special_attack()
+			return
 		
 	match current_state:
 		State.CHASE:
@@ -51,6 +65,7 @@ func _physics_process(delta):
 				var direction = (player.global_position - global_position).normalized()
 				velocity = direction * SPEED
 				anim.flip_h = direction.x < 0
+				
 				if anim.flip_h:
 					$ScytheHitbox.position.x = -abs($ScytheHitbox.position.x)
 				else:
@@ -59,13 +74,7 @@ func _physics_process(delta):
 				if global_position.distance_to(player.global_position) < attack_range:
 					start_attack()
 				
-		State.TELEGRAPH:
-			velocity = Vector2.ZERO
-			
-		State.ATTACK:
-			velocity = Vector2.ZERO
-			
-		State.SUMMON:
+		State.TELEGRAPH, State.ATTACK, State.SUMMON, State.BULLET_RING, State.TELEPORT_OUT, State.TELEPORT_IN:
 			velocity = Vector2.ZERO
 			
 	move_and_slide()
@@ -88,6 +97,76 @@ func start_attack():
 	
 	if current_state == State.ATTACK:
 		current_state = State.CHASE
+
+func trigger_special_attack():
+	special_timer = 0.0
+	if randf() > 0.5:
+		start_teleport()
+	else:
+		start_bullet_ring()
+
+func start_teleport():
+	current_state = State.TELEPORT_OUT
+	danger_icon.visible = true
+	
+	var tween = create_tween()
+	tween.tween_property(anim, "modulate:a", 0.0, 0.4) 
+	
+	await tween.finished
+	if current_hp <= 0 or current_state != State.TELEPORT_OUT: return
+	
+	danger_icon.visible = false
+	
+	var random_angle = randf() * PI * 2
+	var teleport_offset = Vector2(cos(random_angle), sin(random_angle)) * 50.0 
+	
+	global_position = player.global_position + teleport_offset
+	
+	var direction_to_player = (player.global_position - global_position).normalized()
+	anim.flip_h = direction_to_player.x < 0
+	if anim.flip_h:
+		$ScytheHitbox.position.x = -abs($ScytheHitbox.position.x)
+	else:
+		$ScytheHitbox.position.x = abs($ScytheHitbox.position.x)
+	
+	current_state = State.TELEPORT_IN
+	
+	var tween2 = create_tween()
+	tween2.tween_property(anim, "modulate:a", 1.0, 0.2)
+	
+	await tween2.finished
+	if current_hp <= 0 or current_state != State.TELEPORT_IN: return
+	
+	start_attack()
+
+func start_bullet_ring():
+	current_state = State.BULLET_RING
+	danger_icon.visible = true
+	
+	await get_tree().create_timer(0.5).timeout 
+	
+	if current_hp <= 0 or current_state != State.BULLET_RING: return
+	
+	danger_icon.visible = false
+	
+	var num_bullets = 8
+	var angle_step = (2 * PI) / num_bullets
+	
+	for i in range(num_bullets):
+		var bullet = bullet_scene.instantiate()
+		bullet.global_position = global_position
+		bullet.direction = Vector2.RIGHT.rotated(i * angle_step)
+		bullet.damage = 1.0 
+		
+		bullet.is_enemy_bullet = true 
+		
+		get_tree().current_scene.add_child(bullet)
+		
+	await get_tree().create_timer(0.5).timeout 
+	
+	if current_hp <= 0 or current_state != State.BULLET_RING: return
+	
+	current_state = State.CHASE
 
 func start_summon():
 	current_state = State.SUMMON
