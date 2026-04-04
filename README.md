@@ -1,4 +1,4 @@
-﻿# The Legend of Zolda
+# The Legend of Zolda
 
 A top-down 2D action-adventure roguelike built in Godot 4. Take control of Lonk as he navigates a procedurally generated dungeon, battling smart enemies and getting stronger as you go. Reach the final room and [REDACTED] the [REDACTED] and get the Fiforce.
 
@@ -112,15 +112,15 @@ Many of my assets were found online for free
 
 ### Images
 - Lonk: Drawn by me
-    - Lonk Running Animation: Drawn by me
-    - Lonk With Different Weapons: Drawn by me
+	- Lonk Running Animation: Drawn by me
+	- Lonk With Different Weapons: Drawn by me
 
 - Danger Exlamation Mark: Drawn by me
 
 - Final Reward: Drawn by me
 
 - Sword, Gun, Mace: Drawn by me
-    - Weapon Animations: Drawn by me
+	- Weapon Animations: Drawn by me
 
 - Max HP Upgrade: Drawn by me
 
@@ -135,7 +135,7 @@ Many of my assets were found online for free
 - Dungeon Tileset: [Here](https://pixel-poem.itch.io/dungeon-assetpuck?download)
 
 - Boss: [Here](https://darkpixel-kronovi.itch.io/undead-executioner?download)
-    - Boss Animations: [Here](https://darkpixel-kronovi.itch.io/undead-executioner?download)
+	- Boss Animations: [Here](https://darkpixel-kronovi.itch.io/undead-executioner?download)
 
 - Menu Background: Generated with Gemini
 

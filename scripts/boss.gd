@@ -44,7 +44,6 @@ func _physics_process(delta):
 		return
 		
 	if current_state == State.CHASE:
-		# Summon Logic
 		summon_timer += delta
 		if summon_timer >= summon_cooldown_time:
 			start_summon()
