@@ -16,7 +16,6 @@ func _ready():
 			$Area2D/Sprite2D.texture = mace
 
 
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		print("Lonk swapped to: ", weapon_name)
