@@ -64,7 +64,7 @@ Note: While the Menu actions are controlled via the keyboard, the Main Menu's an
 
 - Boss Room Detection: The system specifically recognizes the final Boss/Treasure room and changes the door icon to a Skull.
 
-- Cleared Room Memory: Doors remember if a room has already been conquered and actively hide their loot icons if the player is backtracking.
+- Cleared Room Memory: Doors remember if a room has already been conquered and actively hide their loot icons if the player is backtracking. 
 
 ### UI & Quality of Life
 
