@@ -7,6 +7,8 @@ extends Node
 @onready var game_over_music = $GameOverMusic
 @onready var select_sound = $SelectSound
 @onready var item_sound = $ItemPickup
+@onready var stamina = $Stamina
+@onready var outostamina = $OutOStamina
 
 func stop_all():
 	menu_music.stop()
@@ -45,3 +47,9 @@ func play_select():
 	
 func play_item():
 	item_sound.play()
+	
+func play_stamina():
+	stamina.play()
+	
+func play_outostamina():
+	outostamina.play()

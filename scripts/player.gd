@@ -13,6 +13,12 @@ var current_ammo = max_ammo
 var is_reloading = false
 var is_attacking = false 
 
+var max_mace_stamina = 3
+var current_mace_stamina = max_mace_stamina
+var stamina_regen_time = 1.5
+var stamina_timer = 0.0
+signal out_of_stamina
+
 var facing_direction = Vector2.DOWN
 
 var max_hp = GameManager.player_max_hp
@@ -77,6 +83,18 @@ func _physics_process(delta) -> void:
 	
 	velocity += knockback
 	knockback = knockback.move_toward(Vector2.ZERO, 4000 * delta)
+	
+	if not is_attacking and current_mace_stamina < max_mace_stamina and current_weapon == Weapon.MACE:
+		stamina_timer += delta
+		if stamina_timer >= stamina_regen_time:
+			current_mace_stamina += 1
+			AudioManager.play_stamina()
+			stamina_timer = 0.0
+	elif is_attacking:
+		stamina_timer = 0.0
+		
+	if current_weapon != Weapon.MACE:
+		current_mace_stamina = max_mace_stamina
 		
 	move_and_slide()
 		
@@ -128,6 +146,13 @@ func attack():
 			$WeaponPivot/SwordHitbox/WeaponAnim.visible = false
 			sword_collision.disabled = true
 		Weapon.MACE:
+			if current_mace_stamina <= 0:
+				print("Not enough stamina!")
+				AudioManager.play_outostamina()
+				out_of_stamina.emit()
+				is_attacking = false
+				return
+			current_mace_stamina -= 1
 			mace_sound.play()
 			print("Slammed mace around Lonk for ", get_total_damage(), " damage")
 			mace_collision.disabled = false

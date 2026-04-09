@@ -42,9 +42,6 @@ position = Vector2(878, 397)
 [node name="Player" parent="." index="6"]
 position = Vector2(568, 486)
 
-[node name="PauseMenu" parent="." index="8"]
-visible = false
-
 [node name="Enemy" parent="." index="9" instance=ExtResource("3_uncau")]
 position = Vector2(314, 433)
 

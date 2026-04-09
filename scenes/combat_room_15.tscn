@@ -22,9 +22,6 @@ scale = Vector2(3, 3.0000002)
 [node name="Pillar" parent="NavigationRegion2D/Pillar" index="1" instance=ExtResource("2_5tqwy")]
 position = Vector2(156.46211, 1.277781)
 
-[node name="PauseMenu" parent="." index="8"]
-visible = false
-
 [node name="Enemy" parent="." index="9" instance=ExtResource("3_5tqwy")]
 position = Vector2(569, 280)
 

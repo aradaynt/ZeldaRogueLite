@@ -116,13 +116,25 @@ func start_teleport():
 	
 	danger_icon.visible = false
 	
-	var random_angle = randf() * PI * 2
-	var teleport_offset = Vector2(cos(random_angle), sin(random_angle)) * 50.0 
-	
-	global_position = player.global_position + teleport_offset
-	
 	var direction_to_player = (player.global_position - global_position).normalized()
-	anim.flip_h = direction_to_player.x < 0
+	var teleport_distance = 70.0 
+	
+	var target_position = player.global_position + (direction_to_player * teleport_distance)
+	
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsRayQueryParameters2D.create(player.global_position, target_position)
+	
+	query.exclude = [self, player]
+	
+	var result = space_state.intersect_ray(query)
+	
+	if result:
+		target_position = player.global_position - (direction_to_player * teleport_distance)
+		
+	global_position = target_position
+	var new_direction_to_player = (player.global_position - global_position).normalized()
+	anim.flip_h = new_direction_to_player.x < 0
+	
 	if anim.flip_h:
 		$ScytheHitbox.position.x = -abs($ScytheHitbox.position.x)
 	else:

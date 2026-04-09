@@ -54,9 +54,6 @@ position = Vector2(0, 70)
 [node name="RewardSpawn" parent="." index="7"]
 position = Vector2(421, 293)
 
-[node name="PauseMenu" parent="." index="8"]
-visible = false
-
 [node name="Enemy" parent="." index="9" instance=ExtResource("3_vml84")]
 position = Vector2(415, 295)
 

@@ -19,9 +19,6 @@ navigation_polygon = SubResource("NavigationPolygon_lnia5")
 position = Vector2(609, 149)
 scale = Vector2(5, 4)
 
-[node name="PauseMenu" parent="." index="8"]
-visible = false
-
 [node name="Enemy" parent="." index="9" instance=ExtResource("3_m0eiw")]
 position = Vector2(358, 215)
 

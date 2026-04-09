@@ -21,9 +21,6 @@ position = Vector2(238, 393)
 [node name="Pillar2" parent="NavigationRegion2D" index="1" instance=ExtResource("2_4437g")]
 position = Vector2(876, 149)
 
-[node name="PauseMenu" parent="." index="8"]
-visible = false
-
 [node name="Enemy" parent="." index="9" instance=ExtResource("3_k2k7x")]
 position = Vector2(298, 167)
 
