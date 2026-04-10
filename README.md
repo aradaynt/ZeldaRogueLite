@@ -74,6 +74,12 @@ Note: While the Menu actions are controlled via the keyboard, the Main Menu's an
 
 - Global Audio Control: Synchronized Master Volume sliders in both the Main Menu and Pause Menu that use logarithmic decibel conversion to perfectly scale the game's AudioServer.
 
+- HUD: Displays players health, damage per hit, and ammo/stamina if the equipped weapon is the gun/mace.
+
+- Camera Shakes: When the player takes damage, shake the screen to show impact.
+
+- Audio Queues: All things in game have a sound that will play when interacting with them.
+
 ## How to Run
 
 ### In Godot
