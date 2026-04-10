@@ -32,7 +32,7 @@ A top-down 2D action-adventure roguelike built in Godot 4. Take control of Lonk 
 
 - Resume: `Esc` or click continue in pause menu
 
-- Restart: `R` while in the pause menu
+- Restart: `R` or click restart while in the pause menu
 
 Note: While the Menu actions are controlled via the keyboard, the Main Menu's and Pause menu's volume slider is controlled via the mouse. The Pause Menu can be fully controlled by a mouse.
 
@@ -78,7 +78,7 @@ Note: While the Menu actions are controlled via the keyboard, the Main Menu's an
 
 - Camera Shakes: When the player takes damage, shake the screen to show impact.
 
-- Audio Queues: All things in game have a sound that will play when interacting with them.
+- Audio Queues: All things in game have a sound that will play when interacting with them. (Hit, Attack, Shoot, Stamina regeneration, Out of Stamina, Menu Selection, Hurt)
 
 ## How to Run
 
