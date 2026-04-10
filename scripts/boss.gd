@@ -6,7 +6,7 @@ var current_hp = max_hp
 
 var player = null
 
-enum State {CHASE, TELEGRAPH, ATTACK, SUMMON, TELEPORT_OUT, TELEPORT_IN, BULLET_RING}
+enum State {CHASE, TELEGRAPH, ATTACK, SUMMON, BULLET_RING}
 var current_state = State.CHASE
 var attack_range = 60.0 
 
@@ -23,6 +23,7 @@ var dash_direction = Vector2.ZERO
 var spirit_scene = preload("res://scenes/spirit.tscn") 
 var reward_scene = preload("res://scenes/final_Reward.tscn")
 var bullet_scene = preload("res://scenes/bullet.tscn")
+var shadow_zone_scene = preload("res://scenes/ShadowZone.tscn")
 var is_dying = false
 
 @onready var health_bar = $ProgressBar
@@ -73,7 +74,7 @@ func _physics_process(delta):
 				if global_position.distance_to(player.global_position) < attack_range:
 					start_attack()
 				
-		State.TELEGRAPH, State.ATTACK, State.SUMMON, State.BULLET_RING, State.TELEPORT_OUT, State.TELEPORT_IN:
+		State.TELEGRAPH, State.ATTACK, State.SUMMON, State.BULLET_RING:
 			velocity = Vector2.ZERO
 			
 	move_and_slide()
@@ -100,55 +101,27 @@ func start_attack():
 func trigger_special_attack():
 	special_timer = 0.0
 	if randf() > 0.5:
-		start_teleport()
+		start_shadow_zone()
 	else:
 		start_bullet_ring()
+	
+func start_shadow_zone():
+	current_state = State.TELEGRAPH
+	anim.play("skill1") 
 
-func start_teleport():
-	current_state = State.TELEPORT_OUT
-	danger_icon.visible = true
+	await get_tree().create_timer(0.5).timeout 
 	
-	var tween = create_tween()
-	tween.tween_property(anim, "modulate:a", 0.0, 0.4) 
-	
-	await tween.finished
-	if current_hp <= 0 or current_state != State.TELEPORT_OUT: return
-	
-	danger_icon.visible = false
-	
-	var direction_to_player = (player.global_position - global_position).normalized()
-	var teleport_distance = 70.0 
-	
-	var target_position = player.global_position + (direction_to_player * teleport_distance)
-	
-	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(player.global_position, target_position)
-	
-	query.exclude = [self, player]
-	
-	var result = space_state.intersect_ray(query)
-	
-	if result:
-		target_position = player.global_position - (direction_to_player * teleport_distance)
-		
-	global_position = target_position
-	var new_direction_to_player = (player.global_position - global_position).normalized()
-	anim.flip_h = new_direction_to_player.x < 0
-	
-	if anim.flip_h:
-		$ScytheHitbox.position.x = -abs($ScytheHitbox.position.x)
-	else:
-		$ScytheHitbox.position.x = abs($ScytheHitbox.position.x)
-	
-	current_state = State.TELEPORT_IN
-	
-	var tween2 = create_tween()
-	tween2.tween_property(anim, "modulate:a", 1.0, 0.2)
-	
-	await tween2.finished
-	if current_hp <= 0 or current_state != State.TELEPORT_IN: return
-	
-	start_attack()
+	if current_hp <= 0: return
+
+	var zone = shadow_zone_scene.instantiate()
+	zone.global_position = player.global_position 
+	get_tree().current_scene.add_child(zone)
+
+	if anim.is_playing() and anim.animation == "skill1":
+		await anim.animation_finished
+
+	if current_hp > 0:
+		current_state = State.CHASE
 
 func start_bullet_ring():
 	current_state = State.BULLET_RING

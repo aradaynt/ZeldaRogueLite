@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 const SPEED = 200.0
+var speed_multiplier = 1.0
 
 enum Weapon {NONE, SWORD, MACE, GUN}
 var current_weapon = Weapon.NONE
@@ -68,7 +69,7 @@ func _physics_process(delta) -> void:
 				$AnimatedSprite2D.play("walking_mace")
 			Weapon.GUN:
 				$AnimatedSprite2D.play("walking_gun")
-		velocity = direction * current_speed
+		velocity = direction * current_speed * speed_multiplier
 	else:
 		match current_weapon:
 			Weapon.NONE:

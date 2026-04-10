@@ -454,7 +454,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"skill1",
-"speed": 5.0
+"speed": 30.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -497,7 +497,7 @@ script = ExtResource("1_dlmty")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_xd8r6")
-animation = &"attacking"
+animation = &"skill1"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["enemy"]]
