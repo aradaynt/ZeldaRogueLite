@@ -85,10 +85,10 @@ Note: While the Menu actions are controlled via the keyboard, the Main Menu's an
 
 #### Windows
 
-- Run the file called `Zelda_1.3.1.exe`
+- Run the file called `Zelda_1.3.2.exe`
 
 #### Linux
-- Run the file called `Zelda_1.3.1.x86_64`
+- Run the file called `Zelda_1.3.2.x86_64`
 
 ## Assets
 
